@@ -47,6 +47,7 @@ public class RecordingService extends Service implements Runnable {
         try {
             recorder.prepare();
         } catch (Exception e) {
+        	System.out.println("Problem preparing Recorder.");
             e.printStackTrace();
         }
         recording = true;
