@@ -12,6 +12,8 @@ public class RecordingService extends Service implements Runnable {
 	private MediaRecorder recorder;
 	private boolean recording = false;
 	
+	
+	
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -23,21 +25,27 @@ public class RecordingService extends Service implements Runnable {
 
         new Thread(this).start();	//Starts "run()" as a background thread.
 
-
 	}
-
-	@Override
-	public void onDestroy() {
-	}
-
+	
 	@Override
 	public void onStart(Intent intent, int startid) {
 		
 	}
 
 	@Override
+	public void onDestroy() {
+		stopRecording();
+	}
+
+
+
+	@Override
 	public void run() {
+		startRecording();
 		
+	}
+
+	public void startRecording() {
 		//Set up recorder TODO: Do once in onCreate??
 		recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
@@ -52,8 +60,9 @@ public class RecordingService extends Service implements Runnable {
         }
         recording = true;
         recorder.start();	//RECORD!
-	}
 
+	}
+	
 	public void stopRecording() {
 
         recorder.stop();
