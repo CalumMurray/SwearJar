@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.List;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -50,6 +53,10 @@ public class GoogleSpeechAPI {
 
 			postRequest.setEntity(entity);
 			HttpResponse response = client.execute(postRequest);
+
+			//TODO Parse JSON, go direct, cut out middle string
+			String responseText = getResponseText(response);
+			
 			response.getEntity().getContent().close();
 			
 		} catch (FileNotFoundException ex) {
@@ -59,5 +66,15 @@ public class GoogleSpeechAPI {
 		}
 		
 		return null;
+	}
+
+	/**
+	 * @param response
+	 * @throws IOException
+	 */
+	private String getResponseText(HttpResponse response) throws IOException {
+		StringWriter writer = new StringWriter();
+		IOUtils.copy(response.getEntity().getContent(), writer, "UTF-8");
+		return writer.toString();
 	}
 }
