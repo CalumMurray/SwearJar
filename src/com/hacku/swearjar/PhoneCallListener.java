@@ -1,5 +1,7 @@
 package com.hacku.swearjar;
 
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningServiceInfo;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.PhoneStateListener;
@@ -15,23 +17,36 @@ public class PhoneCallListener extends PhoneStateListener {
     }
     
     public void onCallStateChanged(int state, String incomingNumber) {
-    	
+    	Intent service = new Intent(context, RecordingService.class);
         if (state == TelephonyManager.CALL_STATE_OFFHOOK)
         {
         	// If you're on a phone call
         	
-        	//TODO: Start Recording service on a thread.
-            Intent serv = new Intent(context, RecordingService.class);
-            context.startService(serv);  
+        	//Start Recording service on a thread.
+            context.startService(service);  
         }
         else
         {
-        	//TODO: Stop recording
+        	
+        	if (isMyServiceRunning())
+	        	//Stop recording (by calling Service.onDestroy())
+	        	context.stopService(service);
+        	
         }
                  
            
        
         
+    }
+    
+    private boolean isMyServiceRunning() {
+        ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (RecordingService.class.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
     }
     
 }
