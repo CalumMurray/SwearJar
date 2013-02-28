@@ -1,6 +1,10 @@
-package com.hacku.swearjar;
+package com.hacku.swearjar.speechapi;
 import java.io.Serializable;
 
+/**
+ * Container for JSON returned from Google Speech API
+ * @author Neil
+ */
 public class SpeechResponse implements Serializable{
 	int status;
 	String id;

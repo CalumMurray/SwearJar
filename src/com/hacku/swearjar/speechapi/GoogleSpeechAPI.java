@@ -1,4 +1,4 @@
-package com.hacku.swearjar;
+package com.hacku.swearjar.speechapi;
 
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;

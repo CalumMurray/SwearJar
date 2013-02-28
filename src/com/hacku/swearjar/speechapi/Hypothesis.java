@@ -1,6 +1,10 @@
-package com.hacku.swearjar;
+package com.hacku.swearjar.speechapi;
 import java.io.Serializable;
 
+/**
+ * Container for JSON returned from Google Speech API
+ * @author Neil
+ */
 public class Hypothesis implements Serializable{
 	private String utterance;
 	private float confidence;
