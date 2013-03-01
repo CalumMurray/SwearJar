@@ -7,12 +7,9 @@ import android.os.Environment;
 import android.os.IBinder;
 
 public class RecordingService extends Service implements Runnable {
-
-	private static int fileNameIncrementer = 0;
+	
 	private MediaRecorder recorder;
 	private boolean recording = false;
-	
-	
 	
 	@Override
 	public IBinder onBind(Intent intent) {
