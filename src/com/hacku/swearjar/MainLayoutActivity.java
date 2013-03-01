@@ -17,7 +17,7 @@ public class MainLayoutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
         
-       //TODO: Prefs then run service/listener in background?
+       //TODO: Prefs?
         
         callListener = new PhoneCallListener(this);
         teleManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
