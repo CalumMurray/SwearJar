@@ -1,15 +1,20 @@
 package com.hacku.swearjar;
 
+import java.io.File;
+
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.IBinder;
 
+
 public class RecordingService extends Service implements Runnable {
 	
 	private MediaRecorder recorder;
 	private boolean recording = false;
+	private static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/swearjar";
+	private long timeStamp;
 	
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -19,8 +24,8 @@ public class RecordingService extends Service implements Runnable {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-
-        new Thread(this).start();	//Starts "run()" as a background thread.
+		
+		new Thread(this).start();	//Starts "run()" as a background thread.
 
 	}
 	
@@ -32,8 +37,8 @@ public class RecordingService extends Service implements Runnable {
 	@Override
 	public void onDestroy() {
 		stopRecording();
+		convertToFlac();
 	}
-
 
 
 	@Override
@@ -42,13 +47,14 @@ public class RecordingService extends Service implements Runnable {
 		
 	}
 
-	public void startRecording() {
+	private void startRecording() {
 		//Set up recorder TODO: Do once in onCreate??
 		recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);	//TODO: Record or Convert to 'Speex' or 'FLAC' format?
+        recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);		//TODO: Record or Convert to 'Speex' or 'FLAC' format?
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        recorder.setOutputFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/swearjar" + System.currentTimeMillis() + ".3gp");
+        long timeStamp = System.currentTimeMillis();						//Make unique filename
+        recorder.setOutputFile(filePath + "/swear" + timeStamp + ".wav");
         try {
             recorder.prepare();
         } catch (Exception e) {
@@ -60,10 +66,15 @@ public class RecordingService extends Service implements Runnable {
 
 	}
 	
-	public void stopRecording() {
+	private void stopRecording() {
         recorder.stop();
         recorder.release();
         recording = false;
     }
+	
+	private void convertToFlac() {
+		new FlacConverter().encode(new File(filePath + "/swear" + timeStamp + ".wav"), new File(filePath + "/swear" + timeStamp + ".flac"));
+		
+	}
 	
 }
