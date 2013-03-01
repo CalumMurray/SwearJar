@@ -8,7 +8,7 @@
 	<classpathentry kind="lib" path="libs/apache-mime4j-0.7.2/lib/apache-mime4j-core-0.7.2.jar"/>
 	<classpathentry kind="lib" path="libs/commons-io-2.4/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="libs/httpcomponents-client-4.2.3/lib/httpmime-4.2.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Cal/Dropbox/Uni/Year 3/Internet Programming/Assignments/SwearJar/libs/jlGuiSpx.jar"/>
-	<classpathentry exported="true" kind="lib" path="C:/Users/Cal/Dropbox/Uni/Year 3/Internet Programming/Assignments/SwearJar/libs/javaFlacEncoder-0.2.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Neil/Documents/EclipseWorkspace/workspace/SwearJar/libs/javaFlacEncoder-0.2.3.jar"/>
+	<classpathentry kind="lib" path="libs/jlGuiSpx.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

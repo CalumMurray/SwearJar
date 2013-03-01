@@ -53,8 +53,8 @@ public class RecordingService extends Service implements Runnable {
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);		//TODO: Record or Convert to 'Speex' or 'FLAC' format?
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        long timeStamp = System.currentTimeMillis();						//Make unique filename
-        recorder.setOutputFile(filePath + "/swear" + timeStamp + ".wav");
+        timeStamp = System.currentTimeMillis();						//Make unique filename
+        recorder.setOutputFile(filePath + timeStamp + ".wav");
         try {
             recorder.prepare();
         } catch (Exception e) {
@@ -73,7 +73,7 @@ public class RecordingService extends Service implements Runnable {
     }
 	
 	private void convertToFlac() {
-		new FlacConverter().encode(new File(filePath + "/swear" + timeStamp + ".wav"), new File(filePath + "/swear" + timeStamp + ".flac"));
+		new FlacConverter().encode(new File(filePath + timeStamp + ".wav"), new File(filePath + timeStamp + ".flac"));
 		
 	}
 	
