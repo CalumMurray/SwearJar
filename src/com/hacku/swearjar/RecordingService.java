@@ -1,6 +1,7 @@
 package com.hacku.swearjar;
 
 import java.io.File;
+import javaFlacEncoder.FLAC_FileEncoder;
 
 import android.app.Service;
 import android.content.Intent;
@@ -73,7 +74,7 @@ public class RecordingService extends Service implements Runnable {
     }
 	
 	private void convertToFlac() {
-		new FlacConverter().encode(new File(filePath + timeStamp + ".wav"), new File(filePath + timeStamp + ".flac"));
+		new FLAC_FileEncoder().encode(new File(filePath + timeStamp + ".wav"), new File(filePath + timeStamp + ".flac"));
 		
 	}
 	
