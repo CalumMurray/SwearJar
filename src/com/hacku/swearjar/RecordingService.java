@@ -51,7 +51,7 @@ public class RecordingService extends Service implements Runnable {
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_CALL);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);	//TODO: Record or Convert to 'Speex' or 'FLAC' format?
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        recorder.setOutputFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/swearjar" + (fileNameIncrementer++) + ".3gp");
+        recorder.setOutputFile(Environment.getExternalStorageDirectory().getAbsolutePath() + "/swearjar" + System.currentTimeMillis() + ".3gp");
         try {
             recorder.prepare();
         } catch (Exception e) {
@@ -64,7 +64,6 @@ public class RecordingService extends Service implements Runnable {
 	}
 	
 	public void stopRecording() {
-
         recorder.stop();
         recorder.release();
         recording = false;
