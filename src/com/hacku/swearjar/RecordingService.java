@@ -11,7 +11,12 @@ import android.media.MediaRecorder.AudioSource;
 import android.os.Environment;
 import android.os.IBinder;
 
-
+/**
+ * Service to run as a thread in the background.
+ * Performs actual recording of a phone call to a file.
+ * 
+ * @author Calum
+ */
 public class RecordingService extends Service implements Runnable {
 	
 	private ExtAudioRecorder recorder;

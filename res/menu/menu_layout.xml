@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Specifies the layout of the menu when the hard MENU button is pressed -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuItemPrefs"
+        android:title="@string/Word_Preferences_Label"
+        android:icon="@android:drawable/ic_menu_preferences"/>
+</menu>
