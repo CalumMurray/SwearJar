@@ -2,11 +2,18 @@ package com.hacku.swearjar;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
-
+/**
+ * Initial activity to bootstrap application.
+ * 
+ * @author Calum
+ */
 public class MainLayoutActivity extends Activity {
 	
 	private TelephonyManager teleManager;
@@ -35,10 +42,30 @@ public class MainLayoutActivity extends Activity {
     }
     
     
-    //Do we want a menu?
+    
+    //------------MENU STUFF-------------
+    
+  //What to do when hard 'MENU' button is clicked
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_layout, menu);
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_layout, menu);    //Inflate menu.xml layout
+        return true;
+    }
+
+
+    //What to do when 'MENU' options selected
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.menuItemPrefs:    startActivity(new Intent(this, WordsActivity.class));   //Open word preferences activity
+                                        break;
+
+
+        }
         return true;
     }
 }

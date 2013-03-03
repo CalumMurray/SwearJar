@@ -6,9 +6,7 @@ import java.io.Serializable;
  * @author Neil
  */
 public class SpeechResponse implements Serializable{
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	
 	int status;

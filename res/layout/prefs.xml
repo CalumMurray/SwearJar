@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Layout Used For Preference Menu - Called after selecting Preferences from 'MENU' button's menu.xml -->
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:title="@string/title_word"
+        android:key="blacklistWord"
+        android:inputType="phone"
+        android:digits="1234567890"/>
+
+    <EditTextPreference
+        android:title="@string/title_charge"
+        android:key="blacklistCharge"
+        android:inputType="phone"
+        android:digits="1234567890"/>
+
+</PreferenceScreen>

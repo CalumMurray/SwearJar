@@ -7,6 +7,12 @@ import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
+/**
+ * Listens for a change in phone call state.  When phone is off the hook
+ * it starts the service to record to a file.
+ * 
+ * @author Calum
+ */
 public class PhoneCallListener extends PhoneStateListener {
 	
 	private Context context;

@@ -1,6 +1,8 @@
 package com.hacku.swearjar;
 
 import java.io.File;
+import javaFlacEncoder.FLAC_FileEncoder;
+
 import android.app.Service;
 import android.content.Intent;
 import android.media.AudioFormat;
@@ -9,7 +11,12 @@ import android.media.MediaRecorder.AudioSource;
 import android.os.Environment;
 import android.os.IBinder;
 
-
+/**
+ * Service to run as a thread in the background.
+ * Performs actual recording of a phone call to a file.
+ * 
+ * @author Calum
+ */
 public class RecordingService extends Service implements Runnable {
 	
 	private ExtAudioRecorder recorder;
@@ -76,7 +83,7 @@ public class RecordingService extends Service implements Runnable {
     }
 	
 	private void convertToFlac() {
-		new FlacConverter().encode(new File(filePath + timeStamp + ".wav"), new File(filePath + timeStamp + ".flac"));		
+		new FLAC_FileEncoder().encode(new File(filePath + timeStamp + ".wav"), new File(filePath + timeStamp + ".flac"));		
 	}
 	
 }
