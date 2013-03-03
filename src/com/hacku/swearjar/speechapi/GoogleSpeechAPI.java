@@ -83,14 +83,11 @@ public class GoogleSpeechAPI {
 	 * @return HttpPost object with parameters initialised to audio file
 	 */
 	private static HttpPost getPost(ByteArrayInputStream data) {
-		HttpPost postRequest = new HttpPost(
-				"https://www.google.com/speech-api/v1/recognize"
-						+ "?xjerr=1&pfilter=0&client=chromium&lang=en-US&maxresults=1");
+		HttpPost postRequest = new HttpPost("http://localhost:8080/convert");
 
 		// Specify Content and Content-Type parameters for POST request
 		MultipartEntity entity = new MultipartEntity();
 		entity.addPart("Content", new InputStreamBody(data, "Content"));
-		postRequest.setHeader("Content-Type", "audio/x-flac; rate=16000");
 		postRequest.setEntity(entity);
 		return postRequest;
 	}
