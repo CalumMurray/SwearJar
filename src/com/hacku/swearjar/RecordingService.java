@@ -59,7 +59,6 @@ public class RecordingService extends Service implements Runnable {
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);		//TODO: Record or Convert to 'Speex' or 'FLAC' format?
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-		//recorder = new ExtAudioRecorder(true, AudioSource.VOICE_UPLINK, 16000, AudioFormat.CHANNEL_CONFIGURATION_MONO,AudioFormat.ENCODING_PCM_16BIT);
         timeStamp = System.currentTimeMillis();						//Make unique filename
         recorder.setOutputFile(filePath + timeStamp + ".3gp");
         try {
@@ -77,13 +76,15 @@ public class RecordingService extends Service implements Runnable {
         recorder.stop();
         recorder.release();
         recording = false;
-
+        
+        
         addOccurrences();
        
     }
 
 	private void addOccurrences() {
-		SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(filePath + timeStamp + ".3gp");
+		 SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(filePath + timeStamp + ".3gp");
+	        
 	        
         String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?
         
@@ -93,8 +94,10 @@ public class RecordingService extends Service implements Runnable {
         for (String word : application.getBlacklist().keySet())
         {
         	int occurrences = StringUtils.countMatches(utterance, word);	
-        	application.getOccurrenceMap().put(word, occurrences);
-        }
+        	application.getOccurrenceMap().put(word, occurrences);	//TODO: INCREMENT not overwrite occurrences
+        }       
+	 
+		
 	}
 	
 	

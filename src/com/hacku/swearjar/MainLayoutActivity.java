@@ -23,9 +23,7 @@ public class MainLayoutActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
-        
-       //TODO: Prefs?
-        
+
         callListener = new PhoneCallListener(this);
         teleManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         
@@ -39,6 +37,9 @@ public class MainLayoutActivity extends Activity {
     public void onDestroy() {
     	//TODO: Unregister listener and clean up resources etc.
     	teleManager.listen(callListener, PhoneStateListener.LISTEN_NONE); //Unregister
+    	
+    	//Serialize maps
+    	((SwearJarApplication) getApplication()).onDestroy();
     }
     
     
