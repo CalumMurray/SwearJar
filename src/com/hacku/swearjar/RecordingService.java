@@ -1,15 +1,14 @@
 package com.hacku.swearjar;
 
-import java.io.File;
-import javaFlacEncoder.FLAC_FileEncoder;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.AudioFormat;
 import android.media.MediaRecorder;
-import android.media.MediaRecorder.AudioSource;
-import android.os.Environment;
 import android.os.IBinder;
+
+import com.hacku.swearjar.speechapi.GoogleSpeechAPI;
+import com.hacku.swearjar.speechapi.SpeechResponse;
 
 /**
  * Service to run as a thread in the background.
@@ -19,9 +18,9 @@ import android.os.IBinder;
  */
 public class RecordingService extends Service implements Runnable {
 	
-	private ExtAudioRecorder recorder;
+	private MediaRecorder recorder;
 	private boolean recording = false;
-	private static String filePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/swearjar";
+	private static String filePath = SwearJarApplication.ROOTPATH + "/swearjar";
 	private long timeStamp;
 	
 	@Override
@@ -45,7 +44,6 @@ public class RecordingService extends Service implements Runnable {
 	@Override
 	public void onDestroy() {
 		stopRecording();
-		convertToFlac();
 	}
 
 
@@ -57,14 +55,13 @@ public class RecordingService extends Service implements Runnable {
 
 	private void startRecording() {
 		//Set up recorder TODO: Do once in onCreate??
-		/*recorder = new MediaRecorder();
+		recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.RAW_AMR);		//TODO: Record or Convert to 'Speex' or 'FLAC' format?
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);*/
-		recorder = new ExtAudioRecorder(true, AudioSource.VOICE_UPLINK, 16000, AudioFormat.CHANNEL_CONFIGURATION_MONO,
-                AudioFormat.ENCODING_PCM_16BIT);
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);		//TODO: Record or Convert to 'Speex' or 'FLAC' format?
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+		//recorder = new ExtAudioRecorder(true, AudioSource.VOICE_UPLINK, 16000, AudioFormat.CHANNEL_CONFIGURATION_MONO,AudioFormat.ENCODING_PCM_16BIT);
         timeStamp = System.currentTimeMillis();						//Make unique filename
-        recorder.setOutputFile(filePath + timeStamp + ".wav");
+        recorder.setOutputFile(filePath + timeStamp + ".3gp");
         try {
             recorder.prepare();
         } catch (Exception e) {
@@ -80,10 +77,29 @@ public class RecordingService extends Service implements Runnable {
         recorder.stop();
         recorder.release();
         recording = false;
+        
+        
+        addOccurrences();
+       
     }
-	
-	private void convertToFlac() {
-		new FLAC_FileEncoder().encode(new File(filePath + timeStamp + ".wav"), new File(filePath + timeStamp + ".flac"));		
+
+	private void addOccurrences() {
+		 SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(filePath + timeStamp + ".3gp");
+	        
+	        
+        String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?
+        
+        SwearJarApplication application = (SwearJarApplication) this.getApplication();
+        
+        //Add occurrences from last fetch to application's HashMap
+        for (String word : application.getBlacklist().keySet())
+        {
+        	int occurrences = StringUtils.countMatches(utterance, word);	
+        	application.getOccurrenceMap().put(word, occurrences);
+        }       
+	 
+		
 	}
+	
 	
 }

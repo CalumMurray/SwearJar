@@ -13,6 +13,14 @@ public class SpeechResponse implements Serializable{
 	String id;
 	Hypothesis[] hypotheses;
 	
+	public String getBestUtterance() {
+		
+		if (hypotheses == null || hypotheses[0].getUtterance() == null)
+			return "";
+		return hypotheses[0].getUtterance();
+		
+	}
+	
 	public int getStatus() {
 		return status;
 	}

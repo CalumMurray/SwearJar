@@ -34,10 +34,11 @@ public class PhoneCallListener extends PhoneStateListener {
         else
         {
         	
-        	if (isMyServiceRunning())
+        	if (isMyServiceRunning()) {
 	        	//Stop recording (by calling Service.onDestroy())
 	        	context.stopService(service);
-        	
+        	}
+      
         }
                  
            
@@ -45,7 +46,12 @@ public class PhoneCallListener extends PhoneStateListener {
         
     }
     
-    private boolean isMyServiceRunning() {
+    private void sendToServer() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private boolean isMyServiceRunning() {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         for (RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (RecordingService.class.getName().equals(service.service.getClassName())) {
