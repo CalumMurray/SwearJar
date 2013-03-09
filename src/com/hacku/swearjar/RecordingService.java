@@ -83,7 +83,7 @@ public class RecordingService extends Service implements Runnable {
     }
 
 	private void addOccurrences() {
-		 SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(filePath + timeStamp + ".3gp");
+		SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(filePath + timeStamp + ".3gp");
 	        
 	        
         String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?

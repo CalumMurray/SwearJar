@@ -14,6 +14,9 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 /**
@@ -34,8 +37,7 @@ public class GoogleSpeechAPI {
 	public static SpeechResponse getSpeechResponse(String speechFile) {
 		try {
 			// Read speech file
-			File file = new File(speechFile);
-			InputStream inputStream = new FileInputStream(file);
+			InputStream inputStream = new FileInputStream(speechFile);
 			byte[] bytes = IOUtils.toByteArray(inputStream);
 			ByteArrayInputStream data = new ByteArrayInputStream(bytes);
 
@@ -48,7 +50,9 @@ public class GoogleSpeechAPI {
 
 			// Package the returned JSON into a SpeechResponse
 			SpeechResponse speechResponse = packageResponse(response);
-
+			
+			Log.e("SPEECH RESPONSE", speechResponse.getBestUtterance());
+			
 			// Close the stream
 			response.getEntity().getContent().close();
 
@@ -85,7 +89,7 @@ public class GoogleSpeechAPI {
 	 * @return HttpPost object with parameters initialised to audio file
 	 */
 	private static HttpPost getPost(ByteArrayInputStream data) {
-		HttpPost postRequest = new HttpPost("http://192.168.0.3:8080/convert");
+		HttpPost postRequest = new HttpPost("http://192.168.1.14:8080/convert");
 
 		// Specify Content and Content-Type parameters for POST request
 		MultipartEntity entity = new MultipartEntity();
