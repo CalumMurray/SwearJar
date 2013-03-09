@@ -37,6 +37,10 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:name=".WordsActivity"
+        </activity>
+        
         <service android:enabled="true" android:name=".RecordingService" />
         
         
