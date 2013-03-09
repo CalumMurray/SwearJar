@@ -1,6 +1,7 @@
 package com.hacku.swearjar.speechapi;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,9 +34,10 @@ public class GoogleSpeechAPI {
 	public static SpeechResponse getSpeechResponse(String speechFile) {
 		try {
 			// Read speech file
-			InputStream inputStream = new FileInputStream(speechFile);
-			ByteArrayInputStream data = new ByteArrayInputStream(
-					IOUtils.toByteArray(inputStream));
+			File file = new File(speechFile);
+			InputStream inputStream = new FileInputStream(file);
+			byte[] bytes = IOUtils.toByteArray(inputStream);
+			ByteArrayInputStream data = new ByteArrayInputStream(bytes);
 
 			// Set up the POST request
 			HttpPost postRequest = getPost(data);
@@ -83,7 +85,7 @@ public class GoogleSpeechAPI {
 	 * @return HttpPost object with parameters initialised to audio file
 	 */
 	private static HttpPost getPost(ByteArrayInputStream data) {
-		HttpPost postRequest = new HttpPost("http://localhost:8080/convert");
+		HttpPost postRequest = new HttpPost("http://192.168.0.3:8080/convert");
 
 		// Specify Content and Content-Type parameters for POST request
 		MultipartEntity entity = new MultipartEntity();
