@@ -46,10 +46,6 @@ public class PhoneCallListener extends PhoneStateListener {
         
     }
     
-    private void sendToServer() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	private boolean isMyServiceRunning() {
         ActivityManager manager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);

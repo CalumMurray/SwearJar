@@ -1,7 +1,9 @@
 package com.hacku.swearjar;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -38,7 +40,12 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
+        deserializeMaps();
+        
+        
     }
+
+	
 
 	public HashMap<String, Float> getBlacklist() {
 		return blacklist;
@@ -55,34 +62,40 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 	*/
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+		// Update hashmap
+		String newWord = prefs.getString("blacklistWord", "default");
+		float newcharge = prefs.getFloat("blacklistCharge", 0.5f);
+
+		blacklist.put(newWord, newcharge);
+
+		serializeMaps();
+	}
+	
+	
+    public void onDestroy()
+    {
+		serializeMaps();
+    }
+
+	private void serializeMaps() {
 		
 		try 
 		{
-		
-			if (key.equals("blacklistWord"))
-			{
-				//TODO: Update hashmap
-		
-				//Serialize
-				FileOutputStream blackListFileOut = new FileOutputStream(ROOTPATH + "/blacklist.sj");
-				ObjectOutputStream blackListOut = new ObjectOutputStream(blackListFileOut);
-				blackListOut.writeObject(blacklist);
-				
-				blackListOut.close();
-		        blackListFileOut.close();
-			}
-			else if (key.equals("blacklistCharge"))
-			{
-				//TODO: Update hashmap
-				
-				//Serialize
-				FileOutputStream occurrenceMapFileOut = new FileOutputStream(ROOTPATH + "/occurrences.sj");
-				ObjectOutputStream occurrenceMapOut = new ObjectOutputStream(occurrenceMapFileOut);
-				occurrenceMapOut.writeObject(swearOccurrences);
-				
-				occurrenceMapOut.close();
-				occurrenceMapFileOut.close();
-			}
+			FileOutputStream blackListFileOut = new FileOutputStream(ROOTPATH + "/blacklist.sj");
+			ObjectOutputStream blackListOut = new ObjectOutputStream(blackListFileOut);
+			blackListOut.writeObject(blacklist);
+			
+			blackListOut.close();
+	        blackListFileOut.close();
+	        
+	        
+	        FileOutputStream occurrenceMapFileOut = new FileOutputStream(ROOTPATH + "/occurrences.sj");
+			ObjectOutputStream occurrenceMapOut = new ObjectOutputStream(occurrenceMapFileOut);
+			occurrenceMapOut.writeObject(swearOccurrences);
+			
+			occurrenceMapOut.close();
+			occurrenceMapFileOut.close();
 		}
 		catch (IOException ioe)
 		{
@@ -90,7 +103,37 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 		}
 		
 		
-
 	}
+	
+	private void deserializeMaps() {
+        
+		try
+        {
+           FileInputStream blackListFileIn = new FileInputStream(ROOTPATH + "/blacklist.sj");
+           ObjectInputStream blacklistIn = new ObjectInputStream(blackListFileIn);
+           blacklist = (HashMap<String, Float>) blacklistIn.readObject();
+           blacklistIn.close();
+           blackListFileIn.close();
+           
+           
+           FileInputStream occurrenceFileIn = new FileInputStream(ROOTPATH + "/occurrences.sj");
+           ObjectInputStream occurrencesIn = new ObjectInputStream(occurrenceFileIn);
+           swearOccurrences = (HashMap<String, Integer>) occurrencesIn.readObject();
+           occurrencesIn.close();
+           occurrenceFileIn.close();
+           
+        }
+		catch(IOException i)
+        {
+			System.err.println("Problem loading lists");
+			return;
+        } 
+		catch (ClassNotFoundException e) 
+        {
+			System.err.println("Problem loading lists");
+			return;
+		}
+	}
+	
 
 }
