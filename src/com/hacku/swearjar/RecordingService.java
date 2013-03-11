@@ -1,6 +1,7 @@
 package com.hacku.swearjar;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -81,11 +82,15 @@ public class RecordingService extends Service implements Runnable {
         
         
         addOccurrences();
+        
+        
        
     }
 
 	private void addOccurrences() {
-		SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(new File(filePath + timeStamp + ".3gp"));
+		
+		File rawSpeechFile = new File(filePath + timeStamp + ".3gp");
+		SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(rawSpeechFile);
 	        
 	        
         String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?
@@ -96,11 +101,13 @@ public class RecordingService extends Service implements Runnable {
         for (String word : application.getBlacklist().keySet())
         {
         	int occurrences = StringUtils.countMatches(utterance, word);	
-        	//get current number of 
-        	application.getOccurrenceMap().put(word, occurrences);	//TODO: INCREMENT not overwrite occurrences
+        	//get current number of occurrences per word
+        	int previousOccurrences = application.getOccurrenceMap().get(word);
+        	application.getOccurrenceMap().put(word, previousOccurrences + occurrences);	        
         }       
 	 
-		
+		boolean deleted = rawSpeechFile.delete();	//Delete file
+
 	}
 	
 	
