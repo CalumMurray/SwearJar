@@ -2,7 +2,7 @@
 
     <string name="app_name">SwearJar</string>
     <string name="menu_settings">Press Menu for Settings</string>
-    <string name="title_activity_main_layout">Swear Jar</string>
+    <string name="title_activity_main_layout">SwearJar</string>
     <string name="Word_Preferences_Label">Blacklist</string>
     <string name="title_word">Word to Blacklist</string>
     <string name="title_charge">Cost per Utterance</string>
