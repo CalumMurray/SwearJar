@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Layout Used For Preference Menu - Called after selecting Preferences from 'MENU' button's menu.xml -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+<<<<<<< HEAD
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,18 +22,34 @@
     </ListView>
     
     
+=======
+>>>>>>> ad5fd783dd9593aacc0d9108b12c11361000eb69
     <EditTextPreference
         android:id="@+id/addWord"
         android:title="@string/title_word"
         android:key="blacklistWord"
+<<<<<<< HEAD
         android:inputType="text"
         android:digits="1234567890"/>
+=======
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		android:inputType="text" />
+>>>>>>> ad5fd783dd9593aacc0d9108b12c11361000eb69
 
     <EditTextPreference
          android:id="@+id/addCharge"
         android:title="@string/title_charge"
         android:key="blacklistCharge"
-        android:inputType="phone"
-        android:digits="1234567890"/>
+        android:inputType="number"
+        android:digits="1234567890." />
+    
+    <ListView 
+        android:id="@+id/prefsBlacklist"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@android:color/transparent"
+        android:divider="#CCCCCC"
+        android:dividerHeight="1dp" />
+        
 
 </PreferenceScreen>
