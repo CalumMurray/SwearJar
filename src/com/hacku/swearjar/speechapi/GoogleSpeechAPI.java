@@ -37,7 +37,7 @@ public class GoogleSpeechAPI {
 	 * @param speechFile path to the audio file
 	 * @return SpeechResponse containing recognised speech, null if error occurs
 	 */
-	public static SpeechResponse getSpeechResponse(String speechFile) {
+	public static SpeechResponse getSpeechResponse(File speechFile) {
 		try {
 			// Read speech file
 			InputStream inputStream = new FileInputStream(speechFile);
@@ -59,7 +59,6 @@ public class GoogleSpeechAPI {
 			// Close the stream
 			response.getEntity().getContent().close();
 
-			//TODO: Delete the file now we're finished with it?
 			return speechResponse;
 
 		} catch (FileNotFoundException ex) {
