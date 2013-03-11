@@ -45,6 +45,7 @@ public final class R {
         public static final int pay_button=0x7f060006;
         public static final int title_activity_main_layout=0x7f060002;
         public static final int title_charge=0x7f060005;
+        public static final int title_charity=0x7f060008;
         public static final int title_word=0x7f060004;
     }
     public static final class style {
