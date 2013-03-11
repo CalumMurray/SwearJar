@@ -148,6 +148,20 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 			return;
 		}
 	}
+
+
+
+	public float getTotalCostDue() {
+		float total = 0f;
+		for (String word : blacklist.keySet())
+		{
+			float occurrences = swearOccurrences.get(word);
+			float charge = blacklist.get(word);  
+			total += occurrences * charge;
+			
+		}
+		return total;
+	}
 	
 
 }
