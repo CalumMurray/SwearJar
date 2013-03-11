@@ -54,7 +54,7 @@ public class GoogleSpeechAPI {
 			// Package the returned JSON into a SpeechResponse
 			SpeechResponse speechResponse = packageResponse(response);
 			
-			Log.e("SPEECH RESPONSE", speechResponse.getBestUtterance());
+			//Log.e("SPEECH RESPONSE", speechResponse.getBestUtterance());
 			
 			// Close the stream
 			response.getEntity().getContent().close();
