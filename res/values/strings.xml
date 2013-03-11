@@ -7,4 +7,5 @@
     <string name="title_word">Word to Blacklist</string>
     <string name="title_charge">Cost per Utterance</string>
 	<string name="pay_button">PAY</string>
+	<string name="empty_List">No words currently defined in blacklist\nPress Menu to add a word.</string>
 </resources>

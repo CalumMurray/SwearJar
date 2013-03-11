@@ -1,7 +1,6 @@
 package com.hacku.swearjar;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import org.apache.commons.lang3.StringUtils;
 

@@ -2,19 +2,23 @@ package com.hacku.swearjar;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 /**
  * Initial activity to bootstrap application.
  * 
  * @author Calum
  */
-public class MainLayoutActivity extends Activity {
+public class MainLayoutActivity extends ListActivity {
 	
 	private TelephonyManager teleManager;
 	private PhoneStateListener callListener;
@@ -24,6 +28,14 @@ public class MainLayoutActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
+        //Setup ListAdapter
+        String[] blackListWords = (String[]) ((SwearJarApplication) getApplication()).getBlacklist().keySet().toArray();	//Get blacklisted words from SwearJarApplication as an array
+        setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, blackListWords));
+        ListView lv = getListView();
+        lv.setTextFilterEnabled(true);
+        
+        
+        //Listen for PhoneCalls
         callListener = new PhoneCallListener(this);
         teleManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
         
@@ -40,7 +52,7 @@ public class MainLayoutActivity extends Activity {
     	//TODO: Unregister listener and clean up resources etc.
     	teleManager.listen(callListener, PhoneStateListener.LISTEN_NONE); //Unregister
     	
-    	//Serialize maps
+    	//Serialise maps
     	((SwearJarApplication) getApplication()).onDestroy();
     }
     
