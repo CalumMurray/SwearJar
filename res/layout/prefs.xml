@@ -3,14 +3,32 @@
 <!-- Layout Used For Preference Menu - Called after selecting Preferences from 'MENU' button's menu.xml -->
 
 <PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    
+     <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/addWord"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp" >
+
+    </ListView>
+    
+    
     <EditTextPreference
+        android:id="@+id/addWord"
         android:title="@string/title_word"
         android:key="blacklistWord"
-        android:inputType="phone"
+        android:inputType="text"
         android:digits="1234567890"/>
 
     <EditTextPreference
+         android:id="@+id/addCharge"
         android:title="@string/title_charge"
         android:key="blacklistCharge"
         android:inputType="phone"
