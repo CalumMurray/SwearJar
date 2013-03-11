@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!-- Layout Used For Preference Menu - Called after selecting Preferences from 'MENU' button's menu.xml -->
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-
-<<<<<<< HEAD
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,19 +18,14 @@
     </ListView>
     
     
-=======
->>>>>>> ad5fd783dd9593aacc0d9108b12c11361000eb69
+
     <EditTextPreference
         android:id="@+id/addWord"
         android:title="@string/title_word"
         android:key="blacklistWord"
-<<<<<<< HEAD
-        android:inputType="text"
-        android:digits="1234567890"/>
-=======
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 		android:inputType="text" />
->>>>>>> ad5fd783dd9593aacc0d9108b12c11361000eb69
+
 
     <EditTextPreference
          android:id="@+id/addCharge"

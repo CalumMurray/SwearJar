@@ -16,12 +16,18 @@ public final class R {
         public static final int padding_small=0x7f040000;
     }
     public static final class drawable {
-        public static final int ic_action_search=0x7f020000;
-        public static final int ic_launcher=0x7f020001;
+        public static final int face=0x7f020000;
+        public static final int ic_action_search=0x7f020001;
+        public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int menuItemPrefs=0x7f080001;
-        public static final int prefsBlacklist=0x7f080000;
+        public static final int addCharge=0x7f080004;
+        public static final int addWord=0x7f080003;
+        public static final int button1=0x7f080002;
+        public static final int imageView1=0x7f080000;
+        public static final int listView1=0x7f080001;
+        public static final int menuItemPrefs=0x7f080006;
+        public static final int prefsBlacklist=0x7f080005;
     }
     public static final class layout {
         public static final int main_layout=0x7f030000;
@@ -34,6 +40,7 @@ public final class R {
         public static final int Word_Preferences_Label=0x7f050003;
         public static final int app_name=0x7f050000;
         public static final int menu_settings=0x7f050001;
+        public static final int pay_button=0x7f050006;
         public static final int title_activity_main_layout=0x7f050002;
         public static final int title_charge=0x7f050005;
         public static final int title_word=0x7f050004;

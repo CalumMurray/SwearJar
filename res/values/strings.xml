@@ -6,5 +6,5 @@
     <string name="Word_Preferences_Label">Blacklist</string>
     <string name="title_word">Word to Blacklist</string>
     <string name="title_charge">Cost per Utterance</string>
-
+	<string name="pay_button">PAY</string>
 </resources>

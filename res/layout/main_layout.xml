@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/face" />
-
+        android:src="@drawable/face" >
+	</ImageView>
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
@@ -27,6 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="PAY" />
+        android:text="@string/pay_button" />
 
 </RelativeLayout>
