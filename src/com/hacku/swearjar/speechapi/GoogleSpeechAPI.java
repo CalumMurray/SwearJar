@@ -37,10 +37,11 @@ public class GoogleSpeechAPI {
 	 * @param file path to the audio file
 	 * @return SpeechResponse containing recognised speech, null if error occurs
 	 */
-	public static SpeechResponse getSpeechResponse(File file) {
+
+	public static SpeechResponse getSpeechResponse(File speechFile) {
 		try {
 			// Read speech file
-			InputStream inputStream = new FileInputStream(file);
+			InputStream inputStream = new FileInputStream(speechFile);
 			byte[] bytes = IOUtils.toByteArray(inputStream);
 			ByteArrayInputStream data = new ByteArrayInputStream(bytes);
 
@@ -54,12 +55,11 @@ public class GoogleSpeechAPI {
 			// Package the returned JSON into a SpeechResponse
 			SpeechResponse speechResponse = packageResponse(response);
 			
-			Log.e("SPEECH RESPONSE", speechResponse.getBestUtterance());
+			//Log.e("SPEECH RESPONSE", speechResponse.getBestUtterance());
 			
 			// Close the stream
 			response.getEntity().getContent().close();
 
-			//TODO: Delete the file now we're finished with it?
 			return speechResponse;
 
 		} catch (FileNotFoundException ex) {
