@@ -21,14 +21,18 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int addCharge=0x7f090003;
-        public static final int addWord=0x7f090002;
-        public static final int banner=0x7f090000;
-        public static final int menuItemPrefs=0x7f090004;
-        public static final int payButton=0x7f090001;
+        public static final int addCharge=0x7f090006;
+        public static final int addWord=0x7f090005;
+        public static final int banner=0x7f090003;
+        public static final int menuItemPrefs=0x7f090007;
+        public static final int payButton=0x7f090004;
+        public static final int text_centre=0x7f090000;
+        public static final int text_left=0x7f090001;
+        public static final int text_right=0x7f090002;
     }
     public static final class layout {
-        public static final int main_layout=0x7f030000;
+        public static final int list_item=0x7f030000;
+        public static final int main_layout=0x7f030001;
     }
     public static final class menu {
         public static final int menu_layout=0x7f080000;

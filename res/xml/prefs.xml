@@ -22,7 +22,12 @@
         android:inputType="number"
         android:digits="1234567890." />
 
+    <NumberPicker xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
     
+
+</NumberPicker>
     
 <!--      <ListView 
         android:id="@+id/prefsBlacklist"
