@@ -14,6 +14,9 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.util.Log;
 
@@ -47,7 +50,7 @@ public class GoogleSpeechAPI {
 			// Do the request
 			HttpClient client = new DefaultHttpClient();
 			HttpResponse response = client.execute(postRequest);
-
+			
 			// Package the returned JSON into a SpeechResponse
 			SpeechResponse speechResponse = packageResponse(response);
 			
@@ -56,6 +59,7 @@ public class GoogleSpeechAPI {
 			// Close the stream
 			response.getEntity().getContent().close();
 
+			//TODO: Delete the file now we're finished with it?
 			return speechResponse;
 
 		} catch (FileNotFoundException ex) {
@@ -64,7 +68,8 @@ public class GoogleSpeechAPI {
 			ioe.printStackTrace();
 		}
 
-		return null;
+		//TODO: This kosher ?
+		return new SpeechResponse();
 	}
 
 	/**
@@ -74,8 +79,7 @@ public class GoogleSpeechAPI {
 	 * @return SpeechResponse containing recognised speech
 	 * @throws IOException
 	 */
-	private static SpeechResponse packageResponse(HttpResponse response)
-			throws IOException {
+	private static SpeechResponse packageResponse(HttpResponse response) throws IOException {
 		Gson gson = new Gson();
 		InputStreamReader isr = new InputStreamReader(response.getEntity().getContent());
 		SpeechResponse speechResponse = gson.fromJson(isr, SpeechResponse.class);
@@ -89,7 +93,13 @@ public class GoogleSpeechAPI {
 	 * @return HttpPost object with parameters initialised to audio file
 	 */
 	private static HttpPost getPost(ByteArrayInputStream data) {
-		HttpPost postRequest = new HttpPost("http://192.168.1.14:8080/convert");
+		HttpPost postRequest = new HttpPost("http://192.168.0.2:8080/convert");
+		
+		HttpParams params = new BasicHttpParams();
+		postRequest.setParams(params);
+		
+		HttpConnectionParams.setConnectionTimeout(params, 10000);
+		HttpConnectionParams.setSoTimeout(params, 30000);
 
 		// Specify Content and Content-Type parameters for POST request
 		MultipartEntity entity = new MultipartEntity();

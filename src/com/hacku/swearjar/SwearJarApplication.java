@@ -63,13 +63,27 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 	@Override
 	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
-		// Update hashmap
-		String newWord = prefs.getString("blacklistWord", "default");
-		float newcharge = prefs.getFloat("blacklistCharge", 0.5f);
-
-		blacklist.put(newWord, newcharge);
-
-		serializeMaps();
+		try {
+			// Update hashmap
+			String newWord = prefs.getString("blacklistWord", "default");
+			float newCharge = Float.valueOf(prefs.getString("blacklistCharge", "0.5"));
+			
+			if (newWord == null || newWord.equals("") || newCharge < 0f)
+				return;
+				
+			blacklist.put(newWord, newCharge);
+			serializeMaps();
+		}
+		catch (ClassCastException cce)
+		{
+			
+			return;
+		}
+		catch (NumberFormatException nfe)
+		{
+			
+		}
+		
 	}
 	
 	

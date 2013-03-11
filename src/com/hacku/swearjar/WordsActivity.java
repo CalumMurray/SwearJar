@@ -9,7 +9,7 @@ import android.preference.PreferenceActivity;
  *
  * @author Calum Murray
  */
-public class WordsActivity extends PreferenceActivity
+public class WordsActivity extends PreferenceActivity 
 {
     @Override
     public void onCreate(Bundle savedInstanceState)

@@ -35,6 +35,8 @@ public class MainLayoutActivity extends Activity {
 
     @Override
     public void onDestroy() {
+    	super.onDestroy();
+    	
     	//TODO: Unregister listener and clean up resources etc.
     	teleManager.listen(callListener, PhoneStateListener.LISTEN_NONE); //Unregister
     	
