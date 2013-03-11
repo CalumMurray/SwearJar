@@ -41,6 +41,7 @@ public class MainLayoutActivity extends ListActivity {
         application = (SwearJarApplication) getApplication();
         
         //Setup ListAdapter
+        //TODO: parse blacklist item into 3 different fields defined in list_item.xml
         String[] blackListWords = (String[]) application.getBlacklist().keySet().toArray();	//Get blacklisted words from SwearJarApplication as an array
         setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, blackListWords));
         ListView lv = getListView();
