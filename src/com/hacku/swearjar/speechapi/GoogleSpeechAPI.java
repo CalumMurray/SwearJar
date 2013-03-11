@@ -34,13 +34,13 @@ public class GoogleSpeechAPI {
 	 * POST. Packages the JSON response from Google into a SpeechResponse
 	 * object.
 	 * 
-	 * @param speechFile path to the audio file
+	 * @param file path to the audio file
 	 * @return SpeechResponse containing recognised speech, null if error occurs
 	 */
-	public static SpeechResponse getSpeechResponse(String speechFile) {
+	public static SpeechResponse getSpeechResponse(File file) {
 		try {
 			// Read speech file
-			InputStream inputStream = new FileInputStream(speechFile);
+			InputStream inputStream = new FileInputStream(file);
 			byte[] bytes = IOUtils.toByteArray(inputStream);
 			ByteArrayInputStream data = new ByteArrayInputStream(bytes);
 
