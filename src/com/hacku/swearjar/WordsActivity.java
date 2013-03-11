@@ -15,7 +15,7 @@ public class WordsActivity extends PreferenceActivity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.layout.prefs);	//Displays screen
+        addPreferencesFromResource(R.xml.prefs);	//Displays screen
         
     }
 
