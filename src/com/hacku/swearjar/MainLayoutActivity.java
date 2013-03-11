@@ -54,8 +54,10 @@ public class MainLayoutActivity extends ListActivity {
 			public void onClick(View v) {
 				//Pay through JUST GIVING!!!!!
 				
-				if (!hasInternetConnectivity())
+				if (!hasInternetConnectivity()){
 					Toast.makeText(MainLayoutActivity.this, "Internet Access is required to pay.", Toast.LENGTH_LONG).show();
+					return;
+				}
                 
                 //Loop through words getting total cost
                 float totalCost = application.getTotalCostDue();

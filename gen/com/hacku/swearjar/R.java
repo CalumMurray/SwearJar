@@ -22,9 +22,10 @@ public final class R {
     }
     public static final class id {
         public static final int addCharge=0x7f090006;
+        public static final int addCharity=0x7f090007;
         public static final int addWord=0x7f090005;
         public static final int banner=0x7f090003;
-        public static final int menuItemPrefs=0x7f090007;
+        public static final int menuItemPrefs=0x7f090008;
         public static final int payButton=0x7f090004;
         public static final int text_centre=0x7f090001;
         public static final int text_left=0x7f090000;
