@@ -8,11 +8,13 @@ import java.text.NumberFormat;
 public class BlackListItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	private String word;
 	private BigDecimal charge;
 	private int occurrences;
 
+	
 	public BlackListItem(String word, BigDecimal charge, int occurrences) {
 		this.word = word;
 		this.charge = charge;

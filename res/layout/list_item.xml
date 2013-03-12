@@ -6,7 +6,7 @@
 
 <TextView 
     android:gravity="left"
-    android:id="@+id/text_left"
+    android:id="@+id/text_word"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/padding_medium"
@@ -14,17 +14,26 @@
     />
 
 <TextView 
-    android:gravity="center"
-    android:id="@+id/text_centre"
+    android:gravity="center|left"
+    android:id="@+id/text_occurrence"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/padding_medium"
     android:paddingTop="@dimen/padding_medium"
     />
 
+<TextView 
+    android:gravity="center|right"
+    android:id="@+id/text_charge"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/padding_medium"
+    android:paddingTop="@dimen/padding_medium" 
+    />   
+    
 <TextView 
     android:gravity="right"
-    android:id="@+id/text_right"
+    android:id="@+id/text_total_charge"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingLeft="@dimen/padding_medium"
