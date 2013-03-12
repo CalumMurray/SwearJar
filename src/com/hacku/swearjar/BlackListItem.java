@@ -9,6 +9,8 @@ public class BlackListItem implements Serializable {
 	private String word;
 	private BigDecimal charge;
 	private int occurrences;
+	
+	private NumberFormat nf = NumberFormat.getCurrencyInstance(); 
 
 	public String getWord() {
 		return word;
@@ -28,11 +30,25 @@ public class BlackListItem implements Serializable {
 	public void setOccurrences(int occurrences) {
 		this.occurrences = occurrences;
 	}
+	
+	/**
+	 * @return charge * occurrences
+	 */
+	public BigDecimal getTotalCharge() { 
+		return charge.multiply(new BigDecimal(occurrences));
+	}
+	
 	/**
 	 * @return charge as a String formatted as local currency
 	 */
 	public String formatCharge(){
-		NumberFormat nf = NumberFormat.getCurrencyInstance();
 		return nf.format(charge);
+	}
+	
+	/**
+	 * @return charge * occurrences as a String formatted as local currency
+	 */
+	public String formatTotalCharge(){
+		return nf.format(getTotalCharge());
 	}
 }
