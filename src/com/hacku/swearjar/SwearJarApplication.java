@@ -138,11 +138,11 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 
 
 	public BigDecimal getTotalCostDue() {
-		BigDecimal total = BigDecimal.ZERO;
+		BigDecimal total = new BigDecimal(0);
 		for (BlackListItem item : blackListItems)
 		{
 			//add words total charge to running total
-			total.add(item.getTotalCharge());
+			total = total.add(item.getTotalCharge());
 		}
 		return total;
 	}
