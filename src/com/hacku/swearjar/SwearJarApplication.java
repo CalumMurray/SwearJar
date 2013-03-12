@@ -6,7 +6,10 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import android.app.Application;
 import android.content.SharedPreferences;
@@ -27,9 +30,9 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 	private SharedPreferences prefs;
     //private SharedPreferences.Editor editor;
 
-	private HashMap<String, Float> blacklist =  new HashMap<String, Float>();  
-	private HashMap<String, Integer> swearOccurrences =  new HashMap<String, Integer>();  
-
+//	private HashMap<String, Float> blacklist =  new HashMap<String, Float>();  
+//	private HashMap<String, Integer> swearOccurrences =  new HashMap<String, Integer>();  
+	private List<BlackListItem> blackListItems = new ArrayList<BlackListItem>();
 	
     @Override
     public void onCreate()
@@ -47,14 +50,10 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 
 	
 
-	public HashMap<String, Float> getBlacklist() {
-		return blacklist;
+	public List<BlackListItem> getBlacklist() {
+		return blackListItems;
 	}
 	
-	public HashMap<String, Integer> getOccurrenceMap() {
-		return swearOccurrences;
-	}
-
 
 	/**
 	* Called when word blacklist preference changed.
@@ -66,12 +65,12 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 		try {
 			// Update hashmap
 			String newWord = prefs.getString("blacklistWord", "default");
-			float newCharge = Float.valueOf(prefs.getString("blacklistCharge", "0.5"));
+			BigDecimal newCharge = new BigDecimal(prefs.getString("blacklistCharge", "0.5"));
 			
-			if (newWord == null || newWord.equals("") || newCharge < 0f)
+			if (newWord == null || newWord.equals("") || newCharge.compareTo(BigDecimal.ZERO) < 0)
 				return;
 				
-			blacklist.put(newWord, newCharge);
+			blackListItems.add(new BlackListItem(newWord, newCharge, 0));
 			serializeMaps();
 		}
 		catch (ClassCastException cce)
@@ -98,18 +97,11 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 		{
 			FileOutputStream blackListFileOut = new FileOutputStream(ROOTPATH + "/blacklist.sj");
 			ObjectOutputStream blackListOut = new ObjectOutputStream(blackListFileOut);
-			blackListOut.writeObject(blacklist);
+			blackListOut.writeObject(blackListItems);
 			
 			blackListOut.close();
 	        blackListFileOut.close();
-	        
-	        
-	        FileOutputStream occurrenceMapFileOut = new FileOutputStream(ROOTPATH + "/occurrences.sj");
-			ObjectOutputStream occurrenceMapOut = new ObjectOutputStream(occurrenceMapFileOut);
-			occurrenceMapOut.writeObject(swearOccurrences);
-			
-			occurrenceMapOut.close();
-			occurrenceMapFileOut.close();
+
 		}
 		catch (IOException ioe)
 		{
@@ -119,22 +111,17 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void deserializeMaps() {
         
 		try
         {
            FileInputStream blackListFileIn = new FileInputStream(ROOTPATH + "/blacklist.sj");
            ObjectInputStream blacklistIn = new ObjectInputStream(blackListFileIn);
-           blacklist = (HashMap<String, Float>) blacklistIn.readObject();
+           blackListItems = (ArrayList<BlackListItem>) blacklistIn.readObject();
            blacklistIn.close();
            blackListFileIn.close();
-           
-           
-           FileInputStream occurrenceFileIn = new FileInputStream(ROOTPATH + "/occurrences.sj");
-           ObjectInputStream occurrencesIn = new ObjectInputStream(occurrenceFileIn);
-           swearOccurrences = (HashMap<String, Integer>) occurrencesIn.readObject();
-           occurrencesIn.close();
-           occurrenceFileIn.close();
+
            
         }
 		catch(IOException i)
@@ -151,13 +138,17 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 
 
 
-	public float getTotalCostDue() {
-		float total = 0f;
-		for (String word : blacklist.keySet())
+	public BigDecimal getTotalCostDue() {
+		BigDecimal total = BigDecimal.ZERO;
+		for (BlackListItem item : blackListItems)
 		{
-			float occurrences = swearOccurrences.get(word);
-			float charge = blacklist.get(word);  
-			total += occurrences * charge;
+			String word = item.getWord();
+			BigDecimal charge = item.getCharge();
+			int occurrences = item.getOccurrences();
+			
+			//add to running total
+			charge.multiply(new BigDecimal(occurrences));
+			total.add(charge);
 			
 		}
 		return total;
