@@ -10,7 +10,7 @@ public class BlackListItem implements Serializable {
 	private BigDecimal charge;
 	private int occurrences;
 	
-	private NumberFormat nf = NumberFormat.getCurrencyInstance(); 
+	private NumberFormat formatter = NumberFormat.getCurrencyInstance(); 
 
 	public String getWord() {
 		return word;
@@ -42,13 +42,13 @@ public class BlackListItem implements Serializable {
 	 * @return charge as a String formatted as local currency
 	 */
 	public String formatCharge(){
-		return nf.format(charge);
+		return formatter.format(charge);
 	}
 	
 	/**
 	 * @return charge * occurrences as a String formatted as local currency
 	 */
 	public String formatTotalCharge(){
-		return nf.format(getTotalCharge());
+		return formatter.format(getTotalCharge());
 	}
 }
