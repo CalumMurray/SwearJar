@@ -96,13 +96,13 @@ public class RecordingService extends Service implements Runnable {
         
         SwearJarApplication application = (SwearJarApplication) this.getApplication();
         
-        //Add occurrences from last fetch to application's HashMap
-        for (String word : application.getBlacklist().keySet())
+        //Add occurrences from last fetch to application's blacklist
+        for (BlackListItem item : application.getBlackListItems())
         {
-        	int occurrences = StringUtils.countMatches(utterance, word);	
+        	int occurrences = StringUtils.countMatches(utterance, item.getWord());	
         	//get current number of occurrences per word
-        	int previousOccurrences = application.getOccurrenceMap().get(word);
-        	application.getOccurrenceMap().put(word, previousOccurrences + occurrences);	        
+        	int previousOccurrences = item.getOccurrences();
+        	item.setOccurrences(previousOccurrences + occurrences);        
         }       
 	 
 		boolean deleted = rawSpeechFile.delete();	//Delete file
