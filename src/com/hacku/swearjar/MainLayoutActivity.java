@@ -1,5 +1,9 @@
 package com.hacku.swearjar;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,8 +46,9 @@ public class MainLayoutActivity extends ListActivity {
         
         //Setup ListAdapter
         //TODO: parse blacklist item into 3 different fields defined in list_item.xml
-        String[] blackListWords = (String[]) application.getBlacklist().keySet().toArray();	//Get blacklisted words from SwearJarApplication as an array
-        setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item, blackListWords));
+        ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlacklist();	//Get blacklisted words from SwearJarApplication as an array
+        BlackListArrayAdapter adapter = new BlackListArrayAdapter(this, blackListWords);
+        setListAdapter(adapter);
         ListView lv = getListView();
         lv.setTextFilterEnabled(true);
         
@@ -61,8 +66,10 @@ public class MainLayoutActivity extends ListActivity {
 				}
                 
                 //Loop through words getting total cost
-                float totalCost = application.getTotalCostDue();
-                String webPage = JUST_GIVING_URI.replace("#2", String.valueOf(totalCost));
+                BigDecimal totalCost = application.getTotalCostDue();
+                NumberFormat formatter = NumberFormat.getNumberInstance();
+                formatter.setMaximumFractionDigits(2);
+                String webPage = JUST_GIVING_URI.replace("#2", formatter.format(totalCost));
                 
                 
                 //Start a web browser to go to JustGiving home page

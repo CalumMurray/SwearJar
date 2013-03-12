@@ -1,8 +1,6 @@
 package com.hacku.swearjar;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-//Custom ArrayAdapter to hold multiple text views (split up the blacklistitem's 4 fields)
+/**
+ * Custom ArrayAdapter to hold multiple text views (split up the blacklistitem's 4 fields)
+ */
 public class BlackListArrayAdapter extends ArrayAdapter<BlackListItem> {
 
 	private Context context;
