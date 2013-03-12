@@ -41,9 +41,10 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
         prefs.registerOnSharedPreferenceChangeListener(this);
 
-        deserializeMaps();
+        deserializeBlackList();
         
-        
+        //Test data in blacklist TODO: Remove
+        blackListItems.add(new BlackListItem("fuck", BigDecimal.valueOf(1.00), 3));
     }
 
 	
@@ -69,7 +70,7 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 				return;
 				
 			blackListItems.add(new BlackListItem(newWord, newCharge, 0));
-			serializeMaps();
+			serializeBlackList();
 		}
 		catch (ClassCastException cce)
 		{
@@ -86,10 +87,10 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 	
     public void onDestroy()
     {
-		serializeMaps();
+		serializeBlackList();
     }
 
-	private void serializeMaps() {
+	private void serializeBlackList() {
 		
 		try 
 		{
@@ -110,7 +111,7 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void deserializeMaps() {
+	private void deserializeBlackList() {
         
 		try
         {

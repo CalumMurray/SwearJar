@@ -3,6 +3,7 @@ package com.hacku.swearjar;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 //Entity bean class to represent a single blacklisted word triple (word, charge, occurrences)
 public class BlackListItem implements Serializable {
@@ -14,7 +15,7 @@ public class BlackListItem implements Serializable {
 	private BigDecimal charge;
 	private int occurrences;
 
-	private NumberFormat formatter = NumberFormat.getCurrencyInstance(); 
+	private NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.UK); 
 	
 	
 	public BlackListItem(String word, BigDecimal charge, int occurrences) {
@@ -62,4 +63,5 @@ public class BlackListItem implements Serializable {
 	public String formatTotalCharge(){
 		return formatter.format(getTotalCharge());
 	}
+	
 }

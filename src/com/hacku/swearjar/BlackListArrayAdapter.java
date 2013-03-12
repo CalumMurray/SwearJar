@@ -34,7 +34,7 @@ public class BlackListArrayAdapter extends ArrayAdapter<BlackListItem> {
 		textView[3] = (TextView) rowView.findViewById(R.id.text_total_charge);
 		
 		textView[0].setText(values.get(index).getWord());
-		textView[1].setText(values.get(index).getOccurrences());
+		textView[1].setText(String.valueOf(values.get(index).getOccurrences()));
 		textView[2].setText(values.get(index).formatCharge());
 		textView[3].setText(values.get(index).formatTotalCharge());
 
