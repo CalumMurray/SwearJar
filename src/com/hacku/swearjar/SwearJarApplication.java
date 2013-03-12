@@ -48,7 +48,7 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 
 	
 
-	public List<BlackListItem> getBlacklist() {
+	public List<BlackListItem> getBlackListItems() {
 		return blackListItems;
 	}
 	
@@ -140,14 +140,8 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 		BigDecimal total = BigDecimal.ZERO;
 		for (BlackListItem item : blackListItems)
 		{
-			String word = item.getWord();
-			BigDecimal charge = item.getCharge();
-			int occurrences = item.getOccurrences();
-			
-			//add to running total
-			charge.multiply(new BigDecimal(occurrences));
-			total.add(charge);
-			
+			//add words total charge to running total
+			total.add(item.getTotalCharge());
 		}
 		return total;
 	}

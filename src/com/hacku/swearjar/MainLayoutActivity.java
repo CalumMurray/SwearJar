@@ -46,7 +46,7 @@ public class MainLayoutActivity extends ListActivity {
         
         //Setup ListAdapter
         //TODO: parse blacklist item into 3 different fields defined in list_item.xml
-        ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlacklist();	//Get blacklisted words from SwearJarApplication as an array
+        ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();	//Get blacklisted words from SwearJarApplication as an array
         BlackListArrayAdapter adapter = new BlackListArrayAdapter(this, blackListWords);
         setListAdapter(adapter);
         ListView lv = getListView();
