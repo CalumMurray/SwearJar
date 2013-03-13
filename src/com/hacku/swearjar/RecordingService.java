@@ -99,10 +99,7 @@ public class RecordingService extends Service implements Runnable {
         //Add occurrences from last fetch to application's blacklist
         for (BlackListItem item : application.getBlackListItems())
         {
-        	int occurrences = StringUtils.countMatches(utterance, item.getWord());	
-        	//get current number of occurrences per word
-        	int previousOccurrences = item.getOccurrences();
-        	item.setOccurrences(previousOccurrences + occurrences);        
+        	item.addOccurrences(utterance);       
         }       
 	 
 		boolean deleted = rawSpeechFile.delete();	//Delete file

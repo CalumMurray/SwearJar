@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -82,5 +84,18 @@ public class BlackListItem implements Serializable {
 	 */
 	public static boolean validateCurrency(String string) {
 		return string.matches("^[ ]*[\\d]+[.][\\d][\\d]$");
+	}
+	
+	/**
+	 * Adds to occurrences the number of times that the word it appears 
+	 * in the utterance
+	 * 
+	 * @param utterance to search for word
+	 * @return number of times this BlackListItem's word appears in utterance
+	 */
+	public int addOccurrences(String utterance){
+		int occurrences = StringUtils.countMatches(utterance, word);  //Find the number of matches
+		this.occurrences += occurrences; //Add the matches to the total matches
+		return occurrences;
 	}
 }
