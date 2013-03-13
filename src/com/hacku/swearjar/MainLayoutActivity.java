@@ -4,11 +4,12 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import android.app.ListActivity;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.ListActivity;
-import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.ContextMenu;
@@ -21,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -47,12 +47,12 @@ public class MainLayoutActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
-
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);	//Force to portrait
+		
 		application = (SwearJarApplication) getApplication();
 
 		// Setup ListAdapter
-		ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application
-				.getBlackListItems(); // Get blacklisted words from
+		ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems(); // Get blacklisted words from
 										// SwearJarApplication
 		listAdapter = new BlackListArrayAdapter(this, blackListWords);
 		setListAdapter(listAdapter);
@@ -168,7 +168,6 @@ public class MainLayoutActivity extends ListActivity {
 			ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
 
-		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
 		menu.setHeaderTitle("Options");
 		String[] menuItems = getResources()
 				.getStringArray(R.array.context_menu);
@@ -179,8 +178,6 @@ public class MainLayoutActivity extends ListActivity {
 
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
-				.getMenuInfo();
 		int menuItemIndex = item.getItemId();
 		String[] menuItems = getResources()
 				.getStringArray(R.array.context_menu);

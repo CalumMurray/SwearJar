@@ -7,9 +7,6 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 //Entity bean class to represent a single blacklisted word triple (word, charge, occurrences)
 public class BlackListItem implements Serializable {
 
