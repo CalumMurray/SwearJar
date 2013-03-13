@@ -27,7 +27,7 @@ import android.widget.Toast;
  */
 public class MainLayoutActivity extends ListActivity {
 	
-	private static final String JUST_GIVING_URI = "www.justgiving.com/donation/direct/charity/#1?frequency=single&amount=#2";
+	private static final String JUST_GIVING_URI = "http://www.justgiving.com/donation/direct/charity/#1?frequency=single&amount=#2";
 	private TelephonyManager teleManager;
 	private PhoneStateListener callListener;
 	private Button payButton;
@@ -66,7 +66,8 @@ public class MainLayoutActivity extends ListActivity {
                 BigDecimal totalCost = application.getTotalCostDue();
                 NumberFormat formatter = NumberFormat.getNumberInstance();
                 formatter.setMaximumFractionDigits(2);
-                String webPage = JUST_GIVING_URI.replace("#2", formatter.format(totalCost));
+                String webPage = JUST_GIVING_URI.replace("#1", "2357");
+                webPage = webPage.replace("#2", formatter.format(totalCost));
                 
                 
                 //Start a web browser to go to JustGiving home page
