@@ -25,6 +25,8 @@ public class AddWordActivity extends Activity {
 			public void onClick(View v) {
 				Toast.makeText(AddWordActivity.this, "Word added to blacklist...", Toast.LENGTH_LONG).show();
 				//TODO: Actually do what I just told the user I did.
+				
+				
 			}
 		});
 		
