@@ -10,6 +10,8 @@ import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.ContextMenu;
@@ -215,5 +217,11 @@ public class MainLayoutActivity extends ListActivity {
 		super.onResume();
 		listAdapter.notifyDataSetChanged(); //Refresh list
 	}
+	
+	public final Handler uiCallback = new Handler () {
+		public void handleMessage (Message msg) {    	
+			listAdapter.notifyDataSetChanged();
+	    }
+	};
 
 }
