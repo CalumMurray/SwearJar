@@ -11,11 +11,15 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -42,16 +46,12 @@ public class MainLayoutActivity extends ListActivity {
 		application = (SwearJarApplication) getApplication();
 
 		// Setup ListAdapter
-		// TODO: parse blacklist item into 3 different fields defined in
-		// list_item.xml
-		ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application
-				.getBlackListItems(); // Get blacklisted words from
-										// SwearJarApplication as an array
-		BlackListArrayAdapter adapter = new BlackListArrayAdapter(this,
-				blackListWords);
+		ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems(); // Get blacklisted words from	SwearJarApplication							
+		BlackListArrayAdapter adapter = new BlackListArrayAdapter(this, blackListWords);
 		setListAdapter(adapter);
 		ListView lv = getListView();
 		lv.setTextFilterEnabled(true);
+		registerForContextMenu(lv);    //Context menu for edit/delete choices
 
 		// Setup onClickListener for Pay button
 		payButton = (Button) findViewById(R.id.payButton);
@@ -62,13 +62,11 @@ public class MainLayoutActivity extends ListActivity {
 				// Pay through JUST GIVING!!!!!
 
 				if (!hasInternetConnectivity()) {
-					Toast.makeText(MainLayoutActivity.this,
-							"Internet Access is required to pay.",
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(MainLayoutActivity.this, "Internet Access is required to pay.", Toast.LENGTH_LONG).show();
 					return;
 				}
 
-				goToJustGiving("2357");
+				goToJustGiving("2357");	//TODO: Search charities
 			}
 
 			/**
@@ -93,22 +91,26 @@ public class MainLayoutActivity extends ListActivity {
 			}
 		});
 
+		
+		//Set up onLongClickListener for list items...
+		lv.setOnItemLongClickListener(new OnItemLongClickListener()
+        {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+				openContextMenu(parent);       
+				return true;
+			}
+        });
+		
+
 		// Listen for PhoneCalls
 		callListener = new PhoneCallListener(this);
 		teleManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
-		teleManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE); // Register
-																				// Listener
-																				// to
-																				// be
-																				// notified
-																				// of
-																				// changes
-																				// to
-																				// the
-																				// phone
-																				// call
-																				// state.
+		// Register Listener to be notified of changes to the phone call state.
+		teleManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE); 
 
 	}
 
@@ -123,14 +125,14 @@ public class MainLayoutActivity extends ListActivity {
 		((SwearJarApplication) getApplication()).onDestroy();
 	}
 
-	// Check for internet access
+	// Check for Internet access
 	public boolean hasInternetConnectivity() {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 		if (cm.getActiveNetworkInfo().isConnectedOrConnecting() == false)
 			return false;
 		return true;
 	}
-
+	
 	// ------------MENU STUFF-------------
 
 	// What to do when hard 'MENU' button is clicked
@@ -146,12 +148,55 @@ public class MainLayoutActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menuItemPrefs:
-			startActivity(new Intent(this, WordsActivity.class)); // Open word
-																	// preferences
-																	// activity
+			startActivity(new Intent(this, AddWordActivity.class)); 
 			break;
 
 		}
 		return true;
 	}
+	
+	@Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+        menu.setHeaderTitle("Options");
+        String[] menuItems = getResources().getStringArray(R.array.context_menu);
+        for (int i = 0; i < menuItems.length; i++) 
+        	menu.add(Menu.NONE, i, i, menuItems[i]);
+        
+    }
+
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+	  AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+	  int menuItemIndex = item.getItemId();
+	  String[] menuItems = getResources().getStringArray(R.array.context_menu);
+	  String menuItemName = menuItems[menuItemIndex];
+	  ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
+	  
+	  if (menuItemName.equals("Edit"))	//TODO: Get names more extensibly?
+	  {
+		  Intent intent = new Intent(this, EditWordActivity.class);
+		  intent.putExtra("blackListItem", blackListWords.get(info.position));
+		  startActivity(intent);
+	  }
+	  else if (menuItemName.equals("Delete"))	
+	  {
+		  //Delete word
+		  blackListWords.remove(info.position);	
+		  
+		  //Restart activity TODO: Refresh list (adapter) instead?
+		  Intent intent = getIntent();
+		  finish();
+		  startActivity(intent);
+		  
+	  }
+	  	  
+	  return true;
+	}
+	
+	
+	
 }

@@ -12,4 +12,9 @@
 	<string name="word_hint">New Word&#8230;</string>
 	<string name="charge_hint">New Charge&#8230;</string>
 	<string name="submit_text">Add Word to Blacklist</string>
+	
+	<string-array name="context_menu">
+		<item>Edit</item>
+		<item>Delete</item>
+	</string-array>
 </resources>

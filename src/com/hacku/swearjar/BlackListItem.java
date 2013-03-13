@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 //Entity bean class to represent a single blacklisted word triple (word, charge, occurrences)
 public class BlackListItem implements Serializable {
 
@@ -63,5 +66,7 @@ public class BlackListItem implements Serializable {
 	public String formatTotalCharge(){
 		return formatter.format(getTotalCharge());
 	}
+
+
 	
 }

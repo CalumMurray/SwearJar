@@ -3,7 +3,7 @@ package com.hacku.swearjar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnLongClickListener;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -19,13 +19,12 @@ public class AddWordActivity extends Activity {
 		submitButton = (Button) findViewById(R.id.submit);
 		
 		//OnLongClickListener for button
-		submitButton.setOnLongClickListener(new OnLongClickListener() {
+		submitButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
-			public boolean onLongClick(View v) {
+			public void onClick(View v) {
 				Toast.makeText(AddWordActivity.this, "Word added to blacklist...", Toast.LENGTH_LONG).show();
 				//TODO: Actually do what I just told the user I did.
-				return true;
 			}
 		});
 		
