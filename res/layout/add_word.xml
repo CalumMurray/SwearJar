@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="#222222">
     
     <EditText
             android:id="@+id/add_word"
@@ -11,6 +12,8 @@
             android:background="#cfff"
             android:hint="@string/word_hint"
             android:textSize="30sp"
+            android:padding="10sp"
+            android:layout_margin="10sp"
             android:inputType="textCapWords"/>
     
     <EditText
@@ -21,6 +24,8 @@
             android:hint="@string/charge_hint"
             android:textSize="30sp"
             android:inputType="number"
+            android:padding="10sp"
+            android:layout_margin="10sp"
             android:digits="1234567890."/>
 
     <Button

@@ -34,14 +34,23 @@ public class AddWordActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {				
+				
+				String wordInput = wordText.getText().toString();
+				String chargeInput = chargeText.getText().toString();
+				
 				//Validate the charge
-				if(!BlackListItem.validateCurrency(chargeText.getText().toString())){
+				if (!BlackListItem.validateCurrency(chargeText.getText().toString())){
 					Toast.makeText(AddWordActivity.this, "Invalid charge amount", Toast.LENGTH_LONG).show();
+					return;
+				}
+				else if (wordInput.isEmpty()|| chargeInput.isEmpty())
+				{
+					Toast.makeText(AddWordActivity.this, "Please enter both values in both fields.", Toast.LENGTH_LONG).show();
 					return;
 				}
 				
 				//Create the new item and add to the list
-				BlackListItem blackListItem = new BlackListItem(wordText.getText().toString(), new BigDecimal(chargeText.getText().toString()));
+				BlackListItem blackListItem = new BlackListItem(wordInput, new BigDecimal(chargeInput));
 								
 				application.addBlackListItem(blackListItem);
 				Toast.makeText(AddWordActivity.this, "Word added to blacklist...", Toast.LENGTH_LONG).show();

@@ -42,13 +42,21 @@ public class EditWordActivity extends Activity {
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//Check charge is valid currency
-				if(!BlackListItem.validateCurrency(chargeText.getText().toString())){
+				String wordInput = wordText.getText().toString();
+				String chargeInput = chargeText.getText().toString();
+				
+				//Validate the charge
+				if (!BlackListItem.validateCurrency(chargeText.getText().toString())){
 					Toast.makeText(EditWordActivity.this, "Invalid charge amount", Toast.LENGTH_LONG).show();
 					return;
 				}
+				else if (wordInput.isEmpty()|| chargeInput.isEmpty())
+				{
+					Toast.makeText(EditWordActivity.this, "Please enter both values in both fields.", Toast.LENGTH_LONG).show();
+					return;
+				}
 				
-				application.editBlackListItem(blackListItem, wordText.getText().toString(), new BigDecimal(chargeText.getText().toString()));
+				application.editBlackListItem(blackListItem, wordInput, new BigDecimal(chargeInput));
 
 				setResult(RESULT_OK);
 				finish();
