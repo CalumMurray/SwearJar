@@ -36,6 +36,8 @@ public class MainLayoutActivity extends ListActivity {
 	private PhoneStateListener callListener;
 	private Button payButton;
 
+	private int lastSelectedIndex;
+	
 	private SwearJarApplication application;
 
 	@Override
@@ -96,9 +98,11 @@ public class MainLayoutActivity extends ListActivity {
 		lv.setOnItemLongClickListener(new OnItemLongClickListener()
         {
 
+			
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
+				ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
+				lastSelectedIndex = position;
 				openContextMenu(parent);       
 				return true;
 			}
@@ -159,7 +163,7 @@ public class MainLayoutActivity extends ListActivity {
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)menuInfo;
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         menu.setHeaderTitle("Options");
         String[] menuItems = getResources().getStringArray(R.array.context_menu);
         for (int i = 0; i < menuItems.length; i++) 
@@ -174,18 +178,20 @@ public class MainLayoutActivity extends ListActivity {
 	  int menuItemIndex = item.getItemId();
 	  String[] menuItems = getResources().getStringArray(R.array.context_menu);
 	  String menuItemName = menuItems[menuItemIndex];
-	  ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
+	  
 	  
 	  if (menuItemName.equals("Edit"))	//TODO: Get names more extensibly?
 	  {
 		  Intent intent = new Intent(this, EditWordActivity.class);
-		  intent.putExtra("blackListItem", blackListWords.get(info.position));
+		  intent.putExtra("blackListItemIndex", lastSelectedIndex);
 		  startActivity(intent);
 	  }
 	  else if (menuItemName.equals("Delete"))	
 	  {
+		  ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
+
 		  //Delete word
-		  blackListWords.remove(info.position);	
+		  blackListWords.remove(lastSelectedIndex);	
 		  
 		  //Restart activity TODO: Refresh list (adapter) instead?
 		  Intent intent = getIntent();
