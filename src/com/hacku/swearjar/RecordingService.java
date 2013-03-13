@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaRecorder;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.hacku.swearjar.speechapi.GoogleSpeechAPI;
 import com.hacku.swearjar.speechapi.SpeechResponse;
@@ -95,6 +96,8 @@ public class RecordingService extends Service implements Runnable {
         String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?
         
         SwearJarApplication application = (SwearJarApplication) this.getApplication();
+        
+        Log.e("SPEECH RESPONSE", utterance);
         
         //Add occurrences from last fetch to application's blacklist
         for (BlackListItem item : application.getBlackListItems())

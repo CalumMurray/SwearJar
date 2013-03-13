@@ -88,13 +88,13 @@ public class BlackListItem implements Serializable {
 	
 	/**
 	 * Adds to occurrences the number of times that the word it appears 
-	 * in the utterance
+	 * in the utterance.  Not case sensitive.
 	 * 
 	 * @param utterance to search for word
 	 * @return number of times this BlackListItem's word appears in utterance
 	 */
 	public int addOccurrences(String utterance){
-		int occurrences = StringUtils.countMatches(utterance, word);  //Find the number of matches
+		int occurrences = StringUtils.countMatches(utterance.toUpperCase(), word.toUpperCase());  //Find the number of matches
 		this.occurrences += occurrences; //Add the matches to the total matches
 		return occurrences;
 	}
