@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;

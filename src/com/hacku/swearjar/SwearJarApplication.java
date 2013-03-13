@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Application;
 import android.os.Environment;
 
@@ -62,6 +65,14 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 		itemToEdit.setWord(word);
 		itemToEdit.setCharge(charge);
 		serializeBlackList();
+	}
+	
+	//Adds to occurrences the number of times that the word it appears in the utterance.  Not case sensitive
+	public void addOccurrences(BlackListItem item, String utterance) {
+		int newOccurrences = StringUtils.countMatches(utterance.toUpperCase(), item.getWord().toUpperCase());  //Find the number of matches
+		int prevOccurrences = item.getOccurrences();
+		item.setOccurrences(prevOccurrences + newOccurrences); //Add the matches to the total matches
+		
 	}
 	
 
@@ -152,6 +163,10 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 		}
 		return total;
 	}
+
+
+
+	
 	
 
 }

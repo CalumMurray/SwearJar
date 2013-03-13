@@ -24,6 +24,8 @@ public class RecordingService extends Service implements Runnable {
 	private static String filePath = SwearJarApplication.ROOTPATH + "/swearjar";
 	private long timeStamp;
 	
+	private SwearJarApplication application ;
+
 	@Override
 	public IBinder onBind(Intent intent) {
 		return null;
@@ -32,7 +34,7 @@ public class RecordingService extends Service implements Runnable {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		
+		application = (SwearJarApplication) this.getApplication();
 		new Thread(this).start();	//Starts "run()" as a background thread.
 
 	}
@@ -93,17 +95,17 @@ public class RecordingService extends Service implements Runnable {
 	        
         String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?
         
-        SwearJarApplication application = (SwearJarApplication) this.getApplication();
-        
+                
         Log.e("SPEECH RESPONSE", utterance);
         
         //Add occurrences from last fetch to application's blacklist
         for (BlackListItem item : application.getBlackListItems())
         {
-        	item.addOccurrences(utterance);       
+        	application.addOccurrences(item, utterance);
+        	//item.addOccurrences(utterance);       
         }       
 	 
-		boolean deleted = rawSpeechFile.delete();	//Delete file
+		rawSpeechFile.delete();	//Delete file
 
 	}
 	
