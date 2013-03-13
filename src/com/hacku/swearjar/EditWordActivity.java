@@ -24,8 +24,10 @@ public class EditWordActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_word);
 		
-		//Bundle extras = getIntent().getSerializableExtra("blackListItem")
-		blackListItem = (BlackListItem) getIntent().getSerializableExtra("blackListItem");
+		//Get the list item we need to edit
+		int blackListItemIndex = getIntent().getIntExtra("blackListItemIndex", 0);
+		SwearJarApplication application = (SwearJarApplication) getApplication();
+		blackListItem = application.getBlackListItems().get(blackListItemIndex);
 
 		//Init views
 		submitButton = (Button) findViewById(R.id.submit);
