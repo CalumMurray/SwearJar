@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
 
 	<TextView 
 	    android:gravity="left"
@@ -12,15 +13,7 @@
 	    android:paddingLeft="@dimen/padding_medium"
 	    android:paddingTop="@dimen/padding_medium"
 	    />
-	
-	<TextView 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="@dimen/padding_medium"
-	    android:paddingTop="@dimen/padding_medium"
-	    android:text="x"
-	    />
-	
+
 	<TextView 
 	    android:gravity="center|left"
 	    android:id="@+id/text_occurrence"
@@ -28,6 +21,14 @@
 	    android:layout_height="wrap_content"
 	    android:paddingLeft="@dimen/padding_medium"
 	    android:paddingTop="@dimen/padding_medium"
+	    />
+	
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="@dimen/padding_medium"
+	    android:paddingTop="@dimen/padding_medium"
+	    android:text=" x "
 	    />
 	
 	<TextView 
