@@ -16,15 +16,17 @@ public class EditWordActivity extends Activity {
 	private TextView wordText;
 	private TextView chargeText;
 	private BlackListItem blackListItem;
+	private SwearJarApplication application;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_word);
 		
+		application  = (SwearJarApplication) getApplication();
 		//Get the list item we need to edit
 		int blackListItemIndex = getIntent().getIntExtra("blackListItemIndex", 0);
-		SwearJarApplication application = (SwearJarApplication) getApplication();
+		
 		blackListItem = application.getBlackListItems().get(blackListItemIndex);
 
 		//Init views
@@ -46,8 +48,7 @@ public class EditWordActivity extends Activity {
 					return;
 				}
 				
-				blackListItem.setWord(wordText.getText().toString());
-				blackListItem.setCharge(new BigDecimal(chargeText.getText().toString()));
+				application.editBlackListItem(blackListItem, wordText.getText().toString(), new BigDecimal(chargeText.getText().toString()));
 
 				setResult(RESULT_OK);
 				finish();

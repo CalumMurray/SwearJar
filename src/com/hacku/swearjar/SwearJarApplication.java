@@ -21,15 +21,14 @@ import android.preference.PreferenceManager;
 *
 * @author Calum 
 * */
-public class SwearJarApplication extends Application implements OnSharedPreferenceChangeListener {
+public class SwearJarApplication extends Application /*implements OnSharedPreferenceChangeListener*/ {
 
 	public static final String ROOTPATH = Environment.getExternalStorageDirectory().getAbsolutePath();
 	
-	private SharedPreferences prefs;
+	//private SharedPreferences prefs;
     //private SharedPreferences.Editor editor;
 
-//	private HashMap<String, Float> blacklist =  new HashMap<String, Float>();  
-//	private HashMap<String, Integer> swearOccurrences =  new HashMap<String, Integer>();  
+
 	private List<BlackListItem> blackListItems = new ArrayList<BlackListItem>();
 	
     @Override
@@ -38,13 +37,13 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
         super.onCreate();
         
             //Set up preferences
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        prefs.registerOnSharedPreferenceChangeListener(this);
+//        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+//        prefs.registerOnSharedPreferenceChangeListener(this);
 
         deserializeBlackList();
         
         //Test data in blacklist TODO: Remove
-        blackListItems.add(new BlackListItem("fuck", BigDecimal.valueOf(1.00), 3));
+       // blackListItems.add(new BlackListItem("fuck", BigDecimal.valueOf(1.00), 3));
     }
 
 	
@@ -53,42 +52,54 @@ public class SwearJarApplication extends Application implements OnSharedPreferen
 		return blackListItems;
 	}
 	
+	public void addBlackListItem(BlackListItem itemToAdd) {
+		blackListItems.add(itemToAdd);
+		serializeBlackList();
+	}
+	
+	public void removeBlackListItem(int blackListItemIndex) {
+		blackListItems.remove(blackListItemIndex);
+		serializeBlackList();
+	}
+	
+	public void editBlackListItem(BlackListItem itemToEdit, String word, BigDecimal charge) {
+		
+		itemToEdit.setWord(word);
+		itemToEdit.setCharge(charge);
+		serializeBlackList();
+	}
+	
 
 	/**
 	* Called when word blacklist preference changed.
 	* SharedPreferences here updated to reflect change and remain accessible globally
 	*/
-	@Override
-	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-
-		try {
-			// Update hashmap
-			String newWord = prefs.getString("blacklistWord", "default");
-			BigDecimal newCharge = new BigDecimal(prefs.getString("blacklistCharge", "0.5"));
-			
-			if (newWord == null || newWord.equals("") || newCharge.compareTo(BigDecimal.ZERO) < 0)
-				return;
-				
-			blackListItems.add(new BlackListItem(newWord, newCharge, 0));
-			serializeBlackList();
-		}
-		catch (ClassCastException cce)
-		{
-			
-			return;
-		}
-		catch (NumberFormatException nfe)
-		{
-			
-		}
-		
-	}
+//	@Override
+//	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+//
+//		try {
+//			// Update hashmap
+//			String newWord = prefs.getString("blacklistWord", "default");
+//			BigDecimal newCharge = new BigDecimal(prefs.getString("blacklistCharge", "0.5"));
+//			
+//			if (newWord == null || newWord.equals("") || newCharge.compareTo(BigDecimal.ZERO) < 0)
+//				return;
+//				
+//			blackListItems.add(new BlackListItem(newWord, newCharge, 0));
+//			serializeBlackList();
+//		}
+//		catch (ClassCastException cce)
+//		{
+//			
+//			return;
+//		}
+//		catch (NumberFormatException nfe)
+//		{
+//			
+//		}
+//		
+//	}
 	
-	
-    public void onDestroy()
-    {
-		serializeBlackList();
-    }
 
 	private void serializeBlackList() {
 		

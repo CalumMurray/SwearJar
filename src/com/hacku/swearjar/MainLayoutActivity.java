@@ -128,9 +128,6 @@ public class MainLayoutActivity extends ListActivity {
 
 		// TODO: Unregister listener and clean up resources etc.
 		teleManager.listen(callListener, PhoneStateListener.LISTEN_NONE); // Unregister
-
-		// Serialise maps
-		((SwearJarApplication) getApplication()).onDestroy();
 	}
 
 	// Check for Internet access
@@ -188,16 +185,12 @@ public class MainLayoutActivity extends ListActivity {
 			intent.putExtra("blackListItemIndex", lastSelectedIndex);
 			startActivityForResult(intent, UPDATE_BLACK_LIST_REQUEST);
 		} else if (menuItemName.equals("Delete")) {
-			ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application
-					.getBlackListItems();
+			ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
 
 			// Delete word
-			blackListWords.remove(lastSelectedIndex);
+			application.removeBlackListItem(lastSelectedIndex);
 
-			// Restart activity TODO: Refresh list (adapter) instead?
-			/*Intent intent = getIntent();
-			finish();
-			startActivity(intent);*/
+			// Refresh list (adapter)
 			listAdapter.notifyDataSetChanged();
 		}
 
