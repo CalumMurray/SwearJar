@@ -96,10 +96,7 @@ public class RecordingService extends Service implements Runnable {
         
         Log.e("SPEECH RESPONSE", utterance);
         
-        //Add occurrences from last fetch to application's blacklist
-        for (BlackListItem item : application.getBlackListItems()){
-        	item.addOccurrences(utterance);
-        }
+        application.addOccurrences(utterance);
         
 		rawSpeechFile.delete();	//Delete file
 	}

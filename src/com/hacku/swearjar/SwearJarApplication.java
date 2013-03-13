@@ -74,12 +74,9 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 	//Adds to occurrences the number of times that the word it appears in the utterance.  Not case sensitive
 	public void addOccurrences(String utterance) {
 		
-        //Add occurrences from last fetch to application's blacklist
-        for (BlackListItem item : blackListItems) {
-        	int newOccurrences = StringUtils.countMatches(utterance.toUpperCase(), item.getWord().toUpperCase());  //Find the number of matches
-			int prevOccurrences = item.getOccurrences();
-			item.setOccurrences(prevOccurrences + newOccurrences); //Add the matches to the total matches
-        }
+		//Add occurrences from last fetch to application's blacklist
+        for (BlackListItem item : getBlackListItems())
+        	item.addOccurrences(utterance); 
 		
 		//Tell the UI we're done updating
 		if(uiCallback != null)
