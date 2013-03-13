@@ -30,7 +30,9 @@
         
         <activity
             android:name=".MainLayoutActivity"
-            android:label="@string/title_activity_main_layout" >
+            android:label="@string/title_activity_main_layout" 
+            android:screenOrientation="portrait" 
+            android:configChanges="orientation|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

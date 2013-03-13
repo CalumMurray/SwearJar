@@ -7,13 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Application;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 
 
 /**
@@ -29,7 +24,7 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
     //private SharedPreferences.Editor editor;
 
 
-	private List<BlackListItem> blackListItems = new ArrayList<BlackListItem>();
+	private ArrayList<BlackListItem> blackListItems = new ArrayList<BlackListItem>();
 	
     @Override
     public void onCreate()
@@ -48,7 +43,7 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 
 	
 
-	public List<BlackListItem> getBlackListItems() {
+	public ArrayList<BlackListItem> getBlackListItems() {
 		return blackListItems;
 	}
 	

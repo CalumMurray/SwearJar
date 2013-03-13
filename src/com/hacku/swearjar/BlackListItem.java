@@ -17,7 +17,7 @@ public class BlackListItem implements Serializable {
 	private BigDecimal charge;
 	private int occurrences;
 
-	private NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.UK); 
+	private static final NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.UK); 
 	
 	public BlackListItem(String word, BigDecimal charge){
 		this.word = word;

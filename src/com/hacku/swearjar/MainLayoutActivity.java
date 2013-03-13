@@ -47,7 +47,6 @@ public class MainLayoutActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main_layout);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);	//Force to portrait
 		
 		application = (SwearJarApplication) getApplication();
 
