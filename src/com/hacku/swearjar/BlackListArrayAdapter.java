@@ -1,6 +1,7 @@
 package com.hacku.swearjar;
 
 import java.util.ArrayList;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,7 @@ public class BlackListArrayAdapter extends ArrayAdapter<BlackListItem> {
 		this.values = values;
 	}
 
+	@SuppressLint("DefaultLocale")
 	@Override
 	public View getView(int index, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -33,7 +35,7 @@ public class BlackListArrayAdapter extends ArrayAdapter<BlackListItem> {
 		textView[2] = (TextView) rowView.findViewById(R.id.text_charge);
 		textView[3] = (TextView) rowView.findViewById(R.id.text_total_charge);
 		
-		textView[0].setText(values.get(index).getWord());
+		textView[0].setText(values.get(index).getWord().toUpperCase());
 		textView[1].setText(String.valueOf(values.get(index).getOccurrences()));
 		textView[2].setText(values.get(index).formatCharge());
 		textView[3].setText(values.get(index).formatTotalCharge());
