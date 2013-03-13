@@ -50,7 +50,8 @@ public class MainLayoutActivity extends ListActivity {
 		setContentView(R.layout.main_layout);
 		
 		application = (SwearJarApplication) getApplication();
-
+		application.subscribe(onBlacklistUpdate);
+		
 		// Setup ListAdapter
 		ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems(); // Get blacklisted words from
 										// SwearJarApplication
@@ -217,10 +218,9 @@ public class MainLayoutActivity extends ListActivity {
 		listAdapter.notifyDataSetChanged(); //Refresh list
 	}
 	
-	public final Handler uiCallback = new Handler () {
+	public final Handler onBlacklistUpdate = new Handler () {
 		public void handleMessage (Message msg) {    	
 			listAdapter.notifyDataSetChanged();
 	    }
 	};
-
 }

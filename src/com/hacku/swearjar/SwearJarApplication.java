@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.Application;
 import android.os.Environment;
+import android.os.Handler;
 
 
 /**
@@ -28,6 +29,7 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 
 
 	private ArrayList<BlackListItem> blackListItems = new ArrayList<BlackListItem>();
+	private Handler uiCallback;
 	
     @Override
     public void onCreate()
@@ -44,7 +46,9 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
        // blackListItems.add(new BlackListItem("fuck", BigDecimal.valueOf(1.00), 3));
     }
 
-	
+	public void subscribe(Handler uiCallback){
+		this.uiCallback = uiCallback;
+	}
 
 	public ArrayList<BlackListItem> getBlackListItems() {
 		return blackListItems;
@@ -68,11 +72,18 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 	}
 	
 	//Adds to occurrences the number of times that the word it appears in the utterance.  Not case sensitive
-	public void addOccurrences(BlackListItem item, String utterance) {
-		int newOccurrences = StringUtils.countMatches(utterance.toUpperCase(), item.getWord().toUpperCase());  //Find the number of matches
-		int prevOccurrences = item.getOccurrences();
-		item.setOccurrences(prevOccurrences + newOccurrences); //Add the matches to the total matches
+	public void addOccurrences(String utterance) {
 		
+        //Add occurrences from last fetch to application's blacklist
+        for (BlackListItem item : blackListItems) {
+        	int newOccurrences = StringUtils.countMatches(utterance.toUpperCase(), item.getWord().toUpperCase());  //Find the number of matches
+			int prevOccurrences = item.getOccurrences();
+			item.setOccurrences(prevOccurrences + newOccurrences); //Add the matches to the total matches
+        }
+		
+		//Tell the UI we're done updating
+		if(uiCallback != null)
+			uiCallback.sendEmptyMessage(0);
 	}
 	
 

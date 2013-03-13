@@ -91,22 +91,17 @@ public class RecordingService extends Service implements Runnable {
 		
 		File rawSpeechFile = new File(filePath + timeStamp + ".3gp");
 		SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(rawSpeechFile);
-	        
-	        
+	            
         String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?
         
-                
         Log.e("SPEECH RESPONSE", utterance);
         
         //Add occurrences from last fetch to application's blacklist
-        for (BlackListItem item : application.getBlackListItems())
-        {
-        	application.addOccurrences(item, utterance);
-        	//item.addOccurrences(utterance);       
-        }       
-	 
+        for (BlackListItem item : application.getBlackListItems()){
+        	item.addOccurrences(utterance);
+        }
+        
 		rawSpeechFile.delete();	//Delete file
-
 	}
 	
 	
