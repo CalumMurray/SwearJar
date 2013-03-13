@@ -4,48 +4,56 @@
     android:layout_height="match_parent" 
     android:orientation="horizontal">
 
-<TextView 
-    android:gravity="left"
-    android:id="@+id/text_word"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/padding_medium"
-    android:paddingTop="@dimen/padding_medium"
-    />
-
-<TextView 
-    android:gravity="center|left"
-    android:id="@+id/text_occurrence"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/padding_medium"
-    android:paddingTop="@dimen/padding_medium"
-    />
-
-<TextView 
-    android:gravity="center|right"
-    android:id="@+id/text_charge"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/padding_medium"
-    android:paddingTop="@dimen/padding_medium" 
-    />   
-    
-<TextView 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/padding_medium"
-    android:paddingTop="@dimen/padding_medium"
-    android:text="="
-    />
-    
-<TextView 
-    android:gravity="right"
-    android:id="@+id/text_total_charge"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/padding_medium"
-    android:paddingTop="@dimen/padding_medium" 
-    />    
+	<TextView 
+	    android:gravity="left"
+	    android:id="@+id/text_word"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="@dimen/padding_medium"
+	    android:paddingTop="@dimen/padding_medium"
+	    />
+	
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="@dimen/padding_medium"
+	    android:paddingTop="@dimen/padding_medium"
+	    android:text="x"
+	    />
+	
+	<TextView 
+	    android:gravity="center|left"
+	    android:id="@+id/text_occurrence"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="@dimen/padding_medium"
+	    android:paddingTop="@dimen/padding_medium"
+	    />
+	
+	<TextView 
+	    android:gravity="center|right"
+	    android:id="@+id/text_charge"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="@dimen/padding_medium"
+	    android:paddingTop="@dimen/padding_medium" 
+	    />   
+	    
+	<TextView 
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="@dimen/padding_medium"
+	    android:paddingTop="@dimen/padding_medium"
+	    android:text="="
+	    />
+	    
+	<TextView 
+	    android:gravity="right"
+	    android:id="@+id/text_total_charge"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:paddingLeft="@dimen/padding_medium"
+	    android:paddingTop="@dimen/padding_medium" 
+	    />    
 
 </LinearLayout>
