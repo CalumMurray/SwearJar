@@ -106,8 +106,7 @@ public class MainLayoutActivity extends ListActivity {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application
-						.getBlackListItems();
+				ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
 				lastSelectedIndex = position;
 				openContextMenu(parent);
 				return true;
@@ -217,6 +216,12 @@ public class MainLayoutActivity extends ListActivity {
 				listAdapter.notifyDataSetChanged();
 			}
 		}
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		listAdapter.notifyDataSetChanged(); //Refresh list
 	}
 
 }
