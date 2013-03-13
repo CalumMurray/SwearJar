@@ -21,20 +21,24 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int addCharge=0x7f090007;
-        public static final int addCharity=0x7f090008;
-        public static final int addWord=0x7f090006;
-        public static final int banner=0x7f090004;
-        public static final int menuItemPrefs=0x7f090009;
-        public static final int payButton=0x7f090005;
-        public static final int text_charge=0x7f090002;
-        public static final int text_occurrence=0x7f090001;
-        public static final int text_total_charge=0x7f090003;
-        public static final int text_word=0x7f090000;
+        public static final int addCharge=0x7f09000a;
+        public static final int addCharity=0x7f09000b;
+        public static final int addWord=0x7f090009;
+        public static final int add_charge=0x7f090001;
+        public static final int add_word=0x7f090000;
+        public static final int banner=0x7f090007;
+        public static final int menuItemPrefs=0x7f09000c;
+        public static final int payButton=0x7f090008;
+        public static final int submit=0x7f090002;
+        public static final int text_charge=0x7f090005;
+        public static final int text_occurrence=0x7f090004;
+        public static final int text_total_charge=0x7f090006;
+        public static final int text_word=0x7f090003;
     }
     public static final class layout {
-        public static final int list_item=0x7f030000;
-        public static final int main_layout=0x7f030001;
+        public static final int add_word=0x7f030000;
+        public static final int list_item=0x7f030001;
+        public static final int main_layout=0x7f030002;
     }
     public static final class menu {
         public static final int menu_layout=0x7f080000;
@@ -42,13 +46,16 @@ public final class R {
     public static final class string {
         public static final int Word_Preferences_Label=0x7f060003;
         public static final int app_name=0x7f060000;
+        public static final int charge_hint=0x7f06000a;
         public static final int empty_List=0x7f060007;
         public static final int menu_settings=0x7f060001;
         public static final int pay_button=0x7f060006;
+        public static final int submit_text=0x7f06000b;
         public static final int title_activity_main_layout=0x7f060002;
         public static final int title_charge=0x7f060005;
         public static final int title_charity=0x7f060008;
         public static final int title_word=0x7f060004;
+        public static final int word_hint=0x7f060009;
     }
     public static final class style {
         public static final int AppTheme=0x7f070000;
