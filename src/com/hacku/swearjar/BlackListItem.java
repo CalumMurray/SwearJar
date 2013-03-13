@@ -20,6 +20,11 @@ public class BlackListItem implements Serializable {
 
 	private NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.UK); 
 	
+	public BlackListItem(String word, BigDecimal charge){
+		this.word = word;
+		this.charge = charge;
+		this.occurrences = 0;
+	}
 	
 	public BlackListItem(String word, BigDecimal charge, int occurrences) {
 		this.word = word;
@@ -67,6 +72,15 @@ public class BlackListItem implements Serializable {
 		return formatter.format(getTotalCharge());
 	}
 
-
-	
+	/**
+	 * Regex validation for currency
+	 * 
+	 * Check before setting the charge of a BlackListItem
+	 * 
+	 * @param string
+	 * @return true if string of the form DD*.DD  
+	 */
+	public static boolean validateCurrency(String string) {
+		return string.matches("^[ ]*[\\d]+[.][\\d][\\d]$");
+	}
 }

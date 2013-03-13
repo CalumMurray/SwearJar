@@ -34,25 +34,25 @@ public class EditWordActivity extends Activity {
 		wordText = (TextView) findViewById(R.id.add_word);
 		chargeText = (TextView) findViewById(R.id.add_charge);
 		
+		wordText.setText(blackListItem.getWord());
+		chargeText.setText(blackListItem.getCharge().toString());
+		
+		
 		//Setup onClickListener for Pay button
 		submitButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(!validateCurrency(chargeText.getText().toString())){
-					Toast.makeText(EditWordActivity.this,
-							"Invalid charge amount",
-							Toast.LENGTH_LONG).show();
+				//Check charge is valid currency
+				if(!BlackListItem.validateCurrency(chargeText.getText().toString())){
+					Toast.makeText(EditWordActivity.this, "Invalid charge amount", Toast.LENGTH_LONG).show();
 					return;
 				}
-					
-					
 				
 				blackListItem.setWord(wordText.getText().toString());
 				blackListItem.setCharge(new BigDecimal(chargeText.getText().toString()));
-			}
 
-			private boolean validateCurrency(String string) {
-				return string.matches("^[ ]*[\\d]+[.][\\d][\\d]$");
+				setResult(RESULT_OK);
+				finish();
 			}
 		});
 		

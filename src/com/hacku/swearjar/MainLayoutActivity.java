@@ -21,6 +21,7 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,9 +36,11 @@ public class MainLayoutActivity extends ListActivity {
 	private TelephonyManager teleManager;
 	private PhoneStateListener callListener;
 	private Button payButton;
+	private BlackListArrayAdapter listAdapter;
 
 	private int lastSelectedIndex;
-	
+	public static final int UPDATE_BLACK_LIST_REQUEST = 0; //Pass when starting activity to the black list
+
 	private SwearJarApplication application;
 
 	@Override
@@ -48,12 +51,14 @@ public class MainLayoutActivity extends ListActivity {
 		application = (SwearJarApplication) getApplication();
 
 		// Setup ListAdapter
-		ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems(); // Get blacklisted words from	SwearJarApplication							
-		BlackListArrayAdapter adapter = new BlackListArrayAdapter(this, blackListWords);
-		setListAdapter(adapter);
+		ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application
+				.getBlackListItems(); // Get blacklisted words from
+										// SwearJarApplication
+		listAdapter = new BlackListArrayAdapter(this, blackListWords);
+		setListAdapter(listAdapter);
 		ListView lv = getListView();
 		lv.setTextFilterEnabled(true);
-		registerForContextMenu(lv);    //Context menu for edit/delete choices
+		registerForContextMenu(lv); // Context menu for edit/delete choices
 
 		// Setup onClickListener for Pay button
 		payButton = (Button) findViewById(R.id.payButton);
@@ -64,17 +69,19 @@ public class MainLayoutActivity extends ListActivity {
 				// Pay through JUST GIVING!!!!!
 
 				if (!hasInternetConnectivity()) {
-					Toast.makeText(MainLayoutActivity.this, "Internet Access is required to pay.", Toast.LENGTH_LONG).show();
+					Toast.makeText(MainLayoutActivity.this,
+							"Internet Access is required to pay.",
+							Toast.LENGTH_LONG).show();
 					return;
 				}
 
-				goToJustGiving("2357");	//TODO: Search charities
+				goToJustGiving("2357"); // TODO: Search charities
 			}
 
 			/**
 			 * Sends the phone's browser to the just giving page for the charity
-			 * with charityId.  Extracts the total cost due and sends that as a uri
-			 * parameter. 
+			 * with charityId. Extracts the total cost due and sends that as a
+			 * uri parameter.
 			 */
 			private void goToJustGiving(String charityId) {
 				// Loop through words getting total cost
@@ -93,28 +100,26 @@ public class MainLayoutActivity extends ListActivity {
 			}
 		});
 
-		
-		//Set up onLongClickListener for list items...
-		lv.setOnItemLongClickListener(new OnItemLongClickListener()
-        {
+		// Set up onLongClickListener for list items...
+		lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-			
 			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application
+						.getBlackListItems();
 				lastSelectedIndex = position;
-				openContextMenu(parent);       
+				openContextMenu(parent);
 				return true;
 			}
-        });
-		
+		});
 
 		// Listen for PhoneCalls
 		callListener = new PhoneCallListener(this);
 		teleManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 
 		// Register Listener to be notified of changes to the phone call state.
-		teleManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE); 
+		teleManager.listen(callListener, PhoneStateListener.LISTEN_CALL_STATE);
 
 	}
 
@@ -136,7 +141,7 @@ public class MainLayoutActivity extends ListActivity {
 			return false;
 		return true;
 	}
-	
+
 	// ------------MENU STUFF-------------
 
 	// What to do when hard 'MENU' button is clicked
@@ -152,57 +157,69 @@ public class MainLayoutActivity extends ListActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.menuItemPrefs:
-			startActivity(new Intent(this, AddWordActivity.class)); 
+			startActivityForResult(new Intent(this, AddWordActivity.class), UPDATE_BLACK_LIST_REQUEST);
 			break;
-
 		}
 		return true;
 	}
-	
-	@Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        menu.setHeaderTitle("Options");
-        String[] menuItems = getResources().getStringArray(R.array.context_menu);
-        for (int i = 0; i < menuItems.length; i++) 
-        	menu.add(Menu.NONE, i, i, menuItems[i]);
-        
-    }
 
-	
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+		menu.setHeaderTitle("Options");
+		String[] menuItems = getResources()
+				.getStringArray(R.array.context_menu);
+		for (int i = 0; i < menuItems.length; i++)
+			menu.add(Menu.NONE, i, i, menuItems[i]);
+
+	}
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-	  AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
-	  int menuItemIndex = item.getItemId();
-	  String[] menuItems = getResources().getStringArray(R.array.context_menu);
-	  String menuItemName = menuItems[menuItemIndex];
-	  
-	  
-	  if (menuItemName.equals("Edit"))	//TODO: Get names more extensibly?
-	  {
-		  Intent intent = new Intent(this, EditWordActivity.class);
-		  intent.putExtra("blackListItemIndex", lastSelectedIndex);
-		  startActivity(intent);
-	  }
-	  else if (menuItemName.equals("Delete"))	
-	  {
-		  ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
+		AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item
+				.getMenuInfo();
+		int menuItemIndex = item.getItemId();
+		String[] menuItems = getResources()
+				.getStringArray(R.array.context_menu);
+		String menuItemName = menuItems[menuItemIndex];
 
-		  //Delete word
-		  blackListWords.remove(lastSelectedIndex);	
-		  
-		  //Restart activity TODO: Refresh list (adapter) instead?
-		  Intent intent = getIntent();
-		  finish();
-		  startActivity(intent);
-		  
-	  }
-	  	  
-	  return true;
+		if (menuItemName.equals("Edit")) // TODO: Get names more extensibly?
+		{
+			Intent intent = new Intent(this, EditWordActivity.class);
+			intent.putExtra("blackListItemIndex", lastSelectedIndex);
+			startActivityForResult(intent, UPDATE_BLACK_LIST_REQUEST);
+		} else if (menuItemName.equals("Delete")) {
+			ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application
+					.getBlackListItems();
+
+			// Delete word
+			blackListWords.remove(lastSelectedIndex);
+
+			// Restart activity TODO: Refresh list (adapter) instead?
+			/*Intent intent = getIntent();
+			finish();
+			startActivity(intent);*/
+			listAdapter.notifyDataSetChanged();
+		}
+
+		return true;
 	}
-	
-	
-	
+
+	/**
+	 * Update the list when returning to this activity from an edit request
+	 */
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+
+		if (requestCode == UPDATE_BLACK_LIST_REQUEST) {
+			if (resultCode == RESULT_OK) {
+				listAdapter.notifyDataSetChanged();
+			}
+		}
+	}
+
 }
