@@ -12,6 +12,11 @@ public class Hypothesis implements Serializable{
 	private String utterance;
 	private float confidence;
 	
+	public Hypothesis(){
+		utterance = "";
+		confidence = 0f;
+	}
+	
 	public String getUtterance() {
 		return utterance;
 	}
