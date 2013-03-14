@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import android.app.Application;
+import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.os.Handler;
 
@@ -172,7 +173,13 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 
 
 
-	
+	// Check for Internet access
+	public boolean hasInternetConnectivity() {
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+		if (cm.getActiveNetworkInfo().isConnectedOrConnecting() == false)
+			return false;
+		return true;
+	}
 	
 
 }

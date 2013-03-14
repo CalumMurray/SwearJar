@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -69,7 +68,7 @@ public class MainLayoutActivity extends ListActivity {
 			public void onClick(View v) {
 				// Pay through JUST GIVING!!!!!
 
-				if (!hasInternetConnectivity()) {
+				if (!application.hasInternetConnectivity()) {
 					Toast.makeText(MainLayoutActivity.this,
 							"Internet Access is required to pay.",
 							Toast.LENGTH_LONG).show();
@@ -131,13 +130,7 @@ public class MainLayoutActivity extends ListActivity {
 		teleManager.listen(callListener, PhoneStateListener.LISTEN_NONE); // Unregister
 	}
 
-	// Check for Internet access
-	public boolean hasInternetConnectivity() {
-		ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-		if (cm.getActiveNetworkInfo().isConnectedOrConnecting() == false)
-			return false;
-		return true;
-	}
+	
 
 	// ------------MENU STUFF-------------
 
