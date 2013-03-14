@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#222222">
+    
+<EditText
+            android:id="@+id/charity_search_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#cfff"
+            android:hint="@string/charity_search_hint"
+            android:textSize="30sp"
+            android:padding="10sp"
+            android:layout_margin="10sp"
+            android:inputType="text"/>
+
+<Button
+            android:id="@+id/submit_charity_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="20sp"
+            android:text="@string/charity_search_hint"/>
+
+<ListView
+    	android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp" />
+
+</LinearLayout>
