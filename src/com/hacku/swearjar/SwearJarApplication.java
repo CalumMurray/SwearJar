@@ -85,36 +85,14 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 	}
 	
 
-	/**
-	* Called when word blacklist preference changed.
-	* SharedPreferences here updated to reflect change and remain accessible globally
-	*/
-//	@Override
-//	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//
-//		try {
-//			// Update hashmap
-//			String newWord = prefs.getString("blacklistWord", "default");
-//			BigDecimal newCharge = new BigDecimal(prefs.getString("blacklistCharge", "0.5"));
-//			
-//			if (newWord == null || newWord.equals("") || newCharge.compareTo(BigDecimal.ZERO) < 0)
-//				return;
-//				
-//			blackListItems.add(new BlackListItem(newWord, newCharge, 0));
-//			serializeBlackList();
-//		}
-//		catch (ClassCastException cce)
-//		{
-//			
-//			return;
-//		}
-//		catch (NumberFormatException nfe)
-//		{
-//			
-//		}
-//		
-//	}
-	
+	//After user has paid, word occurrences reset to zero
+	public void resetOccurrences() {
+		for (BlackListItem item : getBlackListItems())
+			item.setOccurrences(0);
+		
+		serializeBlackList();
+		
+	}
 
 	private void serializeBlackList() {
 		
@@ -182,6 +160,8 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 			return false;
 		return true;
 	}
+
+	
 	
 
 }

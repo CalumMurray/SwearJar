@@ -13,7 +13,8 @@
             android:textSize="@dimen/text_extra_large"
             android:padding="@dimen/padding_medium"
             android:layout_margin="@dimen/padding_medium"
-            android:inputType="textCapWords"/>
+            android:inputType="textCapWords"
+            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
     
     <EditText
             android:id="@+id/add_charge"
