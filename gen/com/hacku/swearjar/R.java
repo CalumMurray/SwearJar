@@ -24,15 +24,17 @@ public final class R {
         public static final int ic_launcher=0x7f020002;
     }
     public static final class id {
-        public static final int addCharge=0x7f0a000a;
-        public static final int addCharity=0x7f0a000b;
-        public static final int addWord=0x7f0a0009;
+        public static final int addCharge=0x7f0a000c;
+        public static final int addCharity=0x7f0a000d;
+        public static final int addWord=0x7f0a000b;
         public static final int add_charge=0x7f0a0001;
         public static final int add_word=0x7f0a0000;
         public static final int banner=0x7f0a0007;
-        public static final int menuItemPrefs=0x7f0a000c;
+        public static final int charity_search_text=0x7f0a0009;
+        public static final int menuItemPrefs=0x7f0a000e;
         public static final int payButton=0x7f0a0008;
         public static final int submit=0x7f0a0002;
+        public static final int submit_charity_search=0x7f0a000a;
         public static final int text_charge=0x7f0a0005;
         public static final int text_occurrence=0x7f0a0004;
         public static final int text_total_charge=0x7f0a0006;
@@ -42,6 +44,7 @@ public final class R {
         public static final int add_word=0x7f030000;
         public static final int list_item=0x7f030001;
         public static final int main_layout=0x7f030002;
+        public static final int search_charity=0x7f030003;
     }
     public static final class menu {
         public static final int menu_layout=0x7f090000;
@@ -50,6 +53,7 @@ public final class R {
         public static final int Word_Preferences_Label=0x7f060003;
         public static final int app_name=0x7f060000;
         public static final int charge_hint=0x7f06000a;
+        public static final int charity_search_hint=0x7f06000c;
         public static final int empty_List=0x7f060007;
         public static final int menu_settings=0x7f060001;
         public static final int pay_button=0x7f060006;

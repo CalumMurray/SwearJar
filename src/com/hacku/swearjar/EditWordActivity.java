@@ -7,14 +7,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditWordActivity extends Activity {
 
 	private Button submitButton;
-	private TextView wordText;
-	private TextView chargeText;
+	private EditText wordText;
+	private EditText chargeText;
 	private BlackListItem blackListItem;
 	private SwearJarApplication application;
 	
@@ -31,8 +32,8 @@ public class EditWordActivity extends Activity {
 
 		//Init views
 		submitButton = (Button) findViewById(R.id.submit);
-		wordText = (TextView) findViewById(R.id.add_word);
-		chargeText = (TextView) findViewById(R.id.add_charge);
+		wordText = (EditText) findViewById(R.id.add_word);
+		chargeText = (EditText) findViewById(R.id.add_charge);
 		
 		wordText.setText(blackListItem.getWord());
 		chargeText.setText(blackListItem.getCharge().toString());

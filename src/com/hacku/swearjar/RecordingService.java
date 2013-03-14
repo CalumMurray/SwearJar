@@ -24,7 +24,7 @@ public class RecordingService extends Service implements Runnable {
 	private static String filePath = SwearJarApplication.ROOTPATH + "/swearjar";
 	private long timeStamp;
 	
-	private SwearJarApplication application ;
+	private SwearJarApplication application;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -88,7 +88,6 @@ public class RecordingService extends Service implements Runnable {
     }
 
 	private void addOccurrences() {
-		
 		File rawSpeechFile = new File(filePath + timeStamp + ".3gp");
 		SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(rawSpeechFile);
 	            

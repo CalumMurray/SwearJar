@@ -8,8 +8,6 @@ import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.Application;
 import android.os.Environment;
 import android.os.Handler;

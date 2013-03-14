@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 public class JustGivingAPI {	
 
-	private static HashMap<String, String> getCharitySearchResults(String charitySearch) {
+	public static HashMap<String, String> getCharitySearchResults(String charitySearch) {
 		
 		String url = "http://query.yahooapis.com/v1/public/yql?q=SELECT%20charityId%2C%20name%20FROM%20json%20WHERE%20url%3D%22https%3A%2F%2Fapi-staging.justgiving.com%2Fe336c8aa%2Fv1%2Fcharity%2Fsearch%3Fq%3D"
 				+ charitySearch 

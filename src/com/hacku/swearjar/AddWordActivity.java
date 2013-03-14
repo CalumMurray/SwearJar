@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 public class AddWordActivity extends Activity {
 	
-	private TextView wordText;
-	private TextView chargeText;
+	private EditText wordText;
+	private EditText chargeText;
 	private Button submitButton;
 	private SwearJarApplication application;
 
@@ -26,8 +26,8 @@ public class AddWordActivity extends Activity {
 		application  = (SwearJarApplication) getApplication();
 		
 		submitButton = (Button) findViewById(R.id.submit);
-		wordText = (TextView) findViewById(R.id.add_word);
-		chargeText = (TextView) findViewById(R.id.add_charge);
+		wordText = (EditText) findViewById(R.id.add_word);
+		chargeText = (EditText) findViewById(R.id.add_charge);
 		
 		//OnLongClickListener for button
 		submitButton.setOnClickListener(new OnClickListener() {
@@ -43,7 +43,7 @@ public class AddWordActivity extends Activity {
 					Toast.makeText(AddWordActivity.this, "Invalid charge amount", Toast.LENGTH_LONG).show();
 					return;
 				}
-				else if (wordInput.isEmpty()|| chargeInput.isEmpty())
+				else if (wordInput.isEmpty() || chargeInput.isEmpty())
 				{
 					Toast.makeText(AddWordActivity.this, "Please enter both values in both fields.", Toast.LENGTH_LONG).show();
 					return;
