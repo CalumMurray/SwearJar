@@ -60,8 +60,9 @@ public class RecordingService extends Service implements Runnable {
 		//Set up recorder TODO: Do once in onCreate??
 		recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);		//TODO: Record or Convert to 'Speex' or 'FLAC' format?
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);	
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder.setAudioSamplingRate(16000);
         timeStamp = System.currentTimeMillis();						//Make unique filename
         recorder.setOutputFile(filePath + timeStamp + ".3gp");
         try {
