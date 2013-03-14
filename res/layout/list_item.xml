@@ -29,6 +29,7 @@
 	    android:paddingLeft="@dimen/padding_medium"
 	    android:paddingTop="@dimen/padding_medium"
 	    android:textSize="@dimen/text_large"
+	        style="?android:attr/textAppearanceSearchResultSubtitle"
 	    />
 	
 	<TextView 
@@ -38,6 +39,7 @@
 	    android:paddingTop="@dimen/padding_medium"
 	    android:text=" x "
 	    android:textSize="@dimen/text_medium"
+	        style="?android:attr/textAppearanceSearchResultSubtitle"
 	    />
 	
 	<TextView 
@@ -46,7 +48,9 @@
 	    android:layout_height="wrap_content"
 	    android:paddingLeft="@dimen/padding_medium"
 	    android:paddingTop="@dimen/padding_medium" 
-	    android:textSize="@dimen/text_large"/>
+	    android:textSize="@dimen/text_large"
+	        style="?android:attr/textAppearanceSearchResultSubtitle"
+	    />
 	    
 	<TextView 
 	    android:layout_width="wrap_content"
@@ -54,7 +58,9 @@
 	    android:paddingLeft="@dimen/padding_medium"
 	    android:paddingTop="@dimen/padding_medium"
 	    android:text=" = "
-	    android:textSize="@dimen/text_medium"/>
+	    android:textSize="@dimen/text_medium"
+	        style="?android:attr/textAppearanceSearchResultSubtitle"
+	    />
 	    
 	<TextView 
 	    android:id="@+id/text_total_charge"
@@ -62,6 +68,8 @@
 	    android:layout_height="wrap_content"
 	    android:paddingLeft="@dimen/padding_medium"
 	    android:paddingTop="@dimen/padding_medium" 
-	    android:textSize="@dimen/text_large"/>    
+	    android:textSize="@dimen/text_large"
+	        style="?android:attr/textAppearanceSearchResultSubtitle"
+	    />    
 </LinearLayout>
 </RelativeLayout>

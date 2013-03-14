@@ -11,6 +11,17 @@
         android:src="@drawable/face" >
 	</ImageView>
 	
+    <Button
+        android:id="@+id/payButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/padding_large"
+        android:layout_marginRight="@dimen/padding_large"
+        android:text="@string/pay_button" 
+	style="?android:attr/button"
+	/>
+	
     <!-- References ListAdapter set up programmatically in MainLayoutActivity-->
     <ListView
         android:id="@android:id/list"
@@ -26,13 +37,6 @@
         android:text="@string/empty_List"
         android:layout_marginTop="@dimen/padding_medium"/>
     
-    <Button
-        android:id="@+id/payButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/pay_button" />
-
 </LinearLayout>
 
  

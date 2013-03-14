@@ -42,7 +42,7 @@ public class SearchCharityActivity extends ListActivity {
 		setContentView(R.layout.search_charity);
 		
 		searchField = (EditText) findViewById(R.id.charity_search_text);
-		searchButton = (Button)  findViewById(R.id.submit);
+		searchButton = (Button)  findViewById(R.id.submit_charity_search);
 		application = (SwearJarApplication) getApplication();
 		
 		searchButton.setOnClickListener(new OnClickListener() 

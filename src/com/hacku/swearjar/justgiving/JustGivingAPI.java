@@ -36,9 +36,8 @@ public class JustGivingAPI {
 			try {
 				HttpResponse response = client.execute(request);
 				InputStreamReader inputStream = new InputStreamReader(response.getEntity().getContent());
-				response = client.execute(request);
 				
-				StringWriter sw = null;
+				StringWriter sw = new StringWriter();
 				IOUtils.copy(inputStream, sw);
 				
 				return parseJson(sw.toString());
@@ -60,8 +59,8 @@ public class JustGivingAPI {
 	 */
 	private static ArrayList<Charity> parseJson(String json) throws JSONException {
 		ArrayList<Charity> charityResults = new ArrayList<Charity>();
-		JSONObject jsonObject = new JSONObject(json.toString());
-		JSONArray jsonArray = jsonObject.getJSONArray("charitySearchResults");
+		JSONObject jsonObject = new JSONObject(json);
+		JSONArray jsonArray = jsonObject.getJSONObject("query").getJSONObject("results").getJSONArray("charitySearchResults");
 		
 		for(int i=0; i<jsonArray.length(); i++){
 				JSONObject charityResult = jsonArray.getJSONObject(i);
