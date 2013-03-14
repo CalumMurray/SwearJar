@@ -1,22 +1,26 @@
 package com.hacku.swearjar;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
+import com.hacku.swearjar.justgiving.Charity;
 import com.hacku.swearjar.justgiving.JustGivingAPI;
 
-import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 public class SearchCharityActivity extends ListActivity {
@@ -79,11 +83,16 @@ public class SearchCharityActivity extends ListActivity {
 							return;
 						}
 						
-						//Populate list with results
-						setListAdapter(charityResults);
+						//Extract array of charity names from result set
+						String[] charityNames = new String[charityResults.size()];
+						for (int i = 0; i < charityResults.size(); i++)
+							charityNames[i] = charityResults.get(i).getName();
+
+						//populate listview with charity names
+						setListAdapter(new ArrayAdapter<String>(SearchCharityActivity.this, R.layout.charity_list_item, charityNames));
 						ListView lv = getListView();
 		                lv.setTextFilterEnabled(true);
-		                
+
 		                lv.setOnItemClickListener(new OnItemClickListener()
 		                {
 		                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
@@ -95,13 +104,25 @@ public class SearchCharityActivity extends ListActivity {
 		                            return;
 		                        }
 
-		                        String webPage = DEFINITION_PAGE.replace("WORD", ((TextView) view).getText());
-		                        
-		                             //Start a web browser to pull dictionary definition
-		                        Intent intent = new Intent(Intent.ACTION_VIEW);
-		                        intent.setData(Uri.parse(webPage));
-		                        startActivity(intent);
+		                    	payJustGiving(position);
+
 		                    }
+
+							private void payJustGiving(int position) {
+								// Loop through words getting total cost
+		        				BigDecimal totalCost = application.getTotalCostDue();
+		        				NumberFormat formatter = NumberFormat.getNumberInstance();
+		        				formatter.setMaximumFractionDigits(2);
+		                        
+		                        // Set up URI
+		        				String webPage = JUST_GIVING_URI.replace("#1", charityResults.get(position).getId());
+		        				webPage = webPage.replace("#2", formatter.format(totalCost));
+
+		        				// Start a web browser to go to JustGiving home page
+		                        Intent jgBrowser = new Intent(Intent.ACTION_VIEW);
+		                        jgBrowser.setData(Uri.parse(webPage));
+		                        startActivity(jgBrowser);
+							}
 		                });
 		                
 					};

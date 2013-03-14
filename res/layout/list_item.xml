@@ -53,7 +53,7 @@
 	    android:layout_height="wrap_content"
 	    android:paddingLeft="@dimen/padding_medium"
 	    android:paddingTop="@dimen/padding_medium"
-	    android:text="="
+	    android:text=" = "
 	    android:textSize="@dimen/text_medium"/>
 	    
 	<TextView 

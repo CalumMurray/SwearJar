@@ -80,6 +80,8 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
 		//Tell the UI we're done updating
 		if(uiCallback != null)
 			uiCallback.sendEmptyMessage(0);
+		
+		serializeBlackList();
 	}
 	
 

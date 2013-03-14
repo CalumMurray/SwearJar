@@ -3,6 +3,7 @@ package com.hacku.swearjar.justgiving;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
@@ -19,7 +20,7 @@ import org.json.JSONObject;
 
 public class JustGivingAPI {	
 
-	public static HashMap<String, String> getCharitySearchResults(String charitySearch) {
+	public static ArrayList<Charity> getCharitySearchResults(String charitySearch) {
 		
 		String url = "http://query.yahooapis.com/v1/public/yql?q=SELECT%20charityId%2C%20name%20FROM%20json%20WHERE%20url%3D%22https%3A%2F%2Fapi-staging.justgiving.com%2Fe336c8aa%2Fv1%2Fcharity%2Fsearch%3Fq%3D"
 				+ charitySearch 
@@ -50,15 +51,15 @@ public class JustGivingAPI {
 				e.printStackTrace();
 			}
 			
-			return new HashMap<String, String>();
+			return new ArrayList<Charity>();
 	}
 
 	/**
 	 * @return 
 	 * @throws JSONException
 	 */
-	private static HashMap<String, String> parseJson(String json) throws JSONException {
-		HashMap<String, String> charityResults = new HashMap<String, String>();
+	private static ArrayList<Charity> parseJson(String json) throws JSONException {
+		ArrayList<Charity> charityResults = new ArrayList<Charity>();
 		JSONObject jsonObject = new JSONObject(json.toString());
 		JSONArray jsonArray = jsonObject.getJSONArray("charitySearchResults");
 		
@@ -66,7 +67,7 @@ public class JustGivingAPI {
 				JSONObject charityResult = jsonArray.getJSONObject(i);
 				String name = charityResult.getString("name");
 				String id = charityResult.getString("charityId");
-				charityResults.put(id, name);
+				charityResults.add(new Charity(name, id));
 		}
 		
 		return charityResults;

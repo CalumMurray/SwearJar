@@ -32,7 +32,7 @@ import android.widget.Toast;
  */
 public class MainLayoutActivity extends ListActivity {
 
-	private static final String JUST_GIVING_URI = "http://www.justgiving.com/donation/direct/charity/#1?frequency=single&amount=#2";
+	
 	private TelephonyManager teleManager;
 	private PhoneStateListener callListener;
 	private Button payButton;
@@ -66,38 +66,12 @@ public class MainLayoutActivity extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				// Pay through JUST GIVING!!!!!
-
-				if (!application.hasInternetConnectivity()) {
-					Toast.makeText(MainLayoutActivity.this,
-							"Internet Access is required to pay.",
-							Toast.LENGTH_LONG).show();
-					return;
-				}
-
-				goToJustGiving("2357"); // TODO: Search charities
+				//Seach Charities before paying
+				Intent searchCharites =  new Intent(MainLayoutActivity.this, SearchCharityActivity.class);
+				startActivity(searchCharites);
 			}
 
-			/**
-			 * Sends the phone's browser to the just giving page for the charity
-			 * with charityId. Extracts the total cost due and sends that as a
-			 * uri parameter.
-			 */
-			private void goToJustGiving(String charityId) {
-				// Loop through words getting total cost
-				BigDecimal totalCost = application.getTotalCostDue();
-				NumberFormat formatter = NumberFormat.getNumberInstance();
-				formatter.setMaximumFractionDigits(2);
-
-				// Set up uri
-				String webPage = JUST_GIVING_URI.replace("#1", charityId);
-				webPage = webPage.replace("#2", formatter.format(totalCost));
-
-				// Start a web browser to go to JustGiving home page
-				Intent intent = new Intent(Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(webPage));
-				startActivity(intent);
-			}
+			
 		});
 
 		// Set up onLongClickListener for list items...
