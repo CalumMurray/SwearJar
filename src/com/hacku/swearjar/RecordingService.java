@@ -62,7 +62,6 @@ public class RecordingService extends Service implements Runnable {
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);	
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        recorder.setAudioSamplingRate(16000);
         timeStamp = System.currentTimeMillis();						//Make unique filename
         recorder.setOutputFile(filePath + timeStamp + ".3gp");
         try {
