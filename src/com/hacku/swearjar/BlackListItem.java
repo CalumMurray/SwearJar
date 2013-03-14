@@ -12,12 +12,11 @@ public class BlackListItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	
 	private String word;
 	private BigDecimal charge;
 	private int occurrences;
 
-	private NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.UK); 
+	private static final NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.UK); 
 	
 	public BlackListItem(String word, BigDecimal charge){
 		this.word = word;

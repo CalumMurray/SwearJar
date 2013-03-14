@@ -43,6 +43,7 @@
         <activity android:name=".WordsActivity" /> <!-- REMOVE?? -->
         <activity android:name=".AddWordActivity" />
         <activity android:name=".EditWordActivity" />
+        <activity android:name=".SearchCharityActivity" />
         
         <service android:enabled="true" android:name=".RecordingService" />
         
