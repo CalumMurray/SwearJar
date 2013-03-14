@@ -20,7 +20,6 @@ import com.hacku.swearjar.speechapi.SpeechResponse;
 public class RecordingService extends Service implements Runnable {
 	
 	private MediaRecorder recorder;
-	private boolean recording = false;
 	private static String filePath = SwearJarApplication.ROOTPATH + "/swearjar";
 	private long timeStamp;
 	
@@ -57,7 +56,6 @@ public class RecordingService extends Service implements Runnable {
 	}
 
 	private void startRecording() {
-		//Set up recorder TODO: Do once in onCreate??
 		recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);	
@@ -70,7 +68,6 @@ public class RecordingService extends Service implements Runnable {
         	System.out.println("Problem preparing Recorder.");
             e.printStackTrace();
         }
-        recording = true;
         recorder.start();	//RECORD!
 
 	}
@@ -78,7 +75,6 @@ public class RecordingService extends Service implements Runnable {
 	private void stopRecording() {
         recorder.stop();
         recorder.release();
-        recording = false;
         
         
         addOccurrences();

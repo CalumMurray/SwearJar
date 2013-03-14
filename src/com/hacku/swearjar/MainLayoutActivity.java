@@ -96,7 +96,6 @@ public class MainLayoutActivity extends ListActivity {
 	public void onDestroy() {
 		super.onDestroy();
 
-		// TODO: Unregister listener and clean up resources etc.
 		teleManager.listen(callListener, PhoneStateListener.LISTEN_NONE); // Unregister
 	}
 
@@ -143,7 +142,7 @@ public class MainLayoutActivity extends ListActivity {
 				.getStringArray(R.array.context_menu);
 		String menuItemName = menuItems[menuItemIndex];
 
-		if (menuItemName.equals("Edit")) // TODO: Get names more extensibly?
+		if (menuItemName.equals("Edit")) 
 		{
 			Intent intent = new Intent(this, EditWordActivity.class);
 			intent.putExtra("blackListItemIndex", lastSelectedIndex);

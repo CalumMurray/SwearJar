@@ -19,7 +19,7 @@ import android.os.Handler;
 *
 * @author Calum 
 * */
-public class SwearJarApplication extends Application /*implements OnSharedPreferenceChangeListener*/ {
+public class SwearJarApplication extends Application {
 
 	public static final String ROOTPATH = Environment.getExternalStorageDirectory().getAbsolutePath();
 	
@@ -35,14 +35,8 @@ public class SwearJarApplication extends Application /*implements OnSharedPrefer
     {
         super.onCreate();
         
-            //Set up preferences
-//        prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//        prefs.registerOnSharedPreferenceChangeListener(this);
-
         deserializeBlackList();
         
-        //Test data in blacklist TODO: Remove
-       // blackListItems.add(new BlackListItem("fuck", BigDecimal.valueOf(1.00), 3));
     }
 
 	public void subscribe(Handler uiCallback){

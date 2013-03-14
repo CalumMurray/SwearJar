@@ -65,7 +65,6 @@ public class GoogleSpeechAPI {
 			ioe.printStackTrace();
 		}
 
-		//TODO: This kosher ?
 		return new SpeechResponse();
 	}
 
