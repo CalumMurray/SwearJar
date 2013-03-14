@@ -3,10 +3,8 @@ package com.hacku.swearjar.justgiving;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.net.URI;
-import java.net.URISyntaxException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
@@ -20,28 +18,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.net.Uri;
 
 public class JustGivingAPI {	
 
 	public static ArrayList<Charity> getCharitySearchResults(String charitySearch) {
-		
-		String url = "http://query.yahooapis.com/v1/public/yql?q=SELECT%20charityId%2C%20name%20FROM%20json%20WHERE%20url%3D%22https%3A%2F%2Fapi-staging.justgiving.com%2Fe336c8aa%2Fv1%2Fcharity%2Fsearch%3Fq%3D"
-				+ charitySearch 
-				+ "%26format%3Djson%22%20AND%20itemPath%3D%22json.charitySearchResults%22%20LIMIT%205&format=json&callback=";
-		
-		
+
 		try {
-			URI charityUrl = new URI(url);
-		
-		
+			String searchTerm = charitySearch.replaceAll(" ", "%2B");
+			String url = "http://query.yahooapis.com/v1/public/yql?q=SELECT%20charityId%2C%20name%20FROM%20json%20WHERE%20url%3D%22https%3A%2F%2Fapi-staging.justgiving.com%2Fe336c8aa%2Fv1%2Fcharity%2Fsearch%3Fq%3D"
+						+ searchTerm 
+						+ "%26format%3Djson%22%20AND%20itemPath%3D%22json.charitySearchResults%22%20LIMIT%205&format=json&callback=";
+			
 			//Make connection
 			HttpClient client = new DefaultHttpClient();
-			HttpGet request = new HttpGet(charityUrl);
+			HttpGet request = new HttpGet(url);
 			HttpParams params = request.getParams();
 			HttpConnectionParams.setSoTimeout(params, 30000);
 			request.setParams(params);
-			
+			 
 			
 			HttpResponse response = client.execute(request);
 			InputStreamReader inputStream = new InputStreamReader(response.getEntity().getContent());
@@ -59,9 +53,9 @@ public class JustGivingAPI {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
+//		catch (URISyntaxException e1) {
+//			e1.printStackTrace();
+//		}
 		return new ArrayList<Charity>();
 	}
 
