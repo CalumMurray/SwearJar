@@ -18,7 +18,6 @@ import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 
-import android.util.Log;
 
 import com.google.gson.Gson;
 

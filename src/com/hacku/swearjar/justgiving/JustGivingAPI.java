@@ -3,7 +3,6 @@ package com.hacku.swearjar.justgiving;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import org.apache.commons.io.IOUtils;
@@ -53,9 +52,6 @@ public class JustGivingAPI {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-//		catch (URISyntaxException e1) {
-//			e1.printStackTrace();
-//		}
 		return new ArrayList<Charity>();
 	}
 

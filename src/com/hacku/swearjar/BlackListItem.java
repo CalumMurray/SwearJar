@@ -79,7 +79,7 @@ public class BlackListItem implements Serializable {
 	 * @return true if string of the form DD*.DD  
 	 */
 	public static boolean validateCurrency(String string) {
-		return string.matches("^[ ]*[\\d]+[.][\\d][\\d]$");
+		return string.matches("^\\s*-?(\\d+(\\.\\d{1,2})?|\\.\\d{1,2})\\s*$");
 	}
 	
 	/**

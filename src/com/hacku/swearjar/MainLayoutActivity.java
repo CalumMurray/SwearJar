@@ -1,12 +1,9 @@
 package com.hacku.swearjar;
 
-import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,7 +20,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * Initial activity to bootstrap application.
