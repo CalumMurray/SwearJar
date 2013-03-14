@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="#222222">
+    android:orientation="vertical" >
     
     <EditText
             android:id="@+id/add_word"
@@ -11,9 +10,9 @@
             android:layout_height="wrap_content"
             android:background="#cfff"
             android:hint="@string/word_hint"
-            android:textSize="30sp"
-            android:padding="10sp"
-            android:layout_margin="10sp"
+            android:textSize="@dimen/text_extra_large"
+            android:padding="@dimen/padding_medium"
+            android:layout_margin="@dimen/padding_medium"
             android:inputType="textCapWords"/>
     
     <EditText
@@ -22,18 +21,18 @@
             android:layout_height="wrap_content"
             android:background="#cfff"
             android:hint="@string/charge_hint"
-            android:textSize="30sp"
+            android:textSize="@dimen/text_extra_large"
             android:inputType="number"
-            android:padding="10sp"
-            android:layout_margin="10sp"
+            android:padding="@dimen/padding_medium"
+            android:layout_margin="@dimen/padding_medium"
             android:digits="1234567890."/>
 
     <Button
-            android:id="@+id/submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textSize="20sp"
-            android:text="@string/submit_text"/>
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="@string/submit_text"
+        android:textSize="@dimen/text_medium" />
     
 </LinearLayout>

@@ -13,7 +13,7 @@ public class SearchCharityActivity extends Activity {
 	@Override
 	protected String doInBackground(String... charitySearch) {
 
-		charityResults = getCharitySearchResults(yql);
+		//charityResults = getCharitySearchResults(yql);
 		
 		return "";
 	}
@@ -26,7 +26,7 @@ public class SearchCharityActivity extends Activity {
 	@Override
 	protected void onPostExecute(String result) {
 		
-		sendtoui(charitySearchResults);
+		//sendtoui(charitySearchResults);
 	};
 	}.execute("");
 	
