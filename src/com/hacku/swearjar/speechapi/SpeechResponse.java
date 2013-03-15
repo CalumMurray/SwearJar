@@ -21,10 +21,15 @@ public class SpeechResponse implements Serializable{
 	}
 	
 	public String getBestUtterance() {
-		
+		try{
 		if (hypotheses == null || hypotheses[0].getUtterance() == null)
 			return "";
 		return hypotheses[0].getUtterance();
+		}
+		catch(ArrayIndexOutOfBoundsException aie)
+		{
+			return "";
+		}
 		
 	}
 	

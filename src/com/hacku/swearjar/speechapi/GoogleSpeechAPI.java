@@ -89,7 +89,8 @@ public class GoogleSpeechAPI {
 	 * @return HttpPost object with parameters initialised to audio file
 	 */
 	private static HttpPost getPost(ByteArrayInputStream data) {
-		HttpPost postRequest = new HttpPost("http://134.36.37.24:8080/convert");
+		//http://134.36.37.24:8080/convert
+		HttpPost postRequest = new HttpPost("http://192.168.0.13:8080/convert");
 		
 		HttpParams params = new BasicHttpParams();
 		postRequest.setParams(params);
