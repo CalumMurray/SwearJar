@@ -31,16 +31,15 @@ import android.widget.ListView;
  * @author Calum
  */
 public class MainLayoutActivity extends ListActivity {
-
-	private static int notificationID = 0;
+	
+	public static final int UPDATE_BLACK_LIST_REQUEST = 0; //Pass when starting activity to the black list
 	
 	private TelephonyManager teleManager;
 	private PhoneStateListener callListener;
 	private Button payButton;
 	private BlackListArrayAdapter listAdapter;
 
-	private int lastSelectedIndex;
-	public static final int UPDATE_BLACK_LIST_REQUEST = 0; //Pass when starting activity to the black list
+	private int lastSelectedIndex;	//list position of blacklist word the user clicked on
 
 	private SwearJarApplication application;
 
@@ -67,7 +66,7 @@ public class MainLayoutActivity extends ListActivity {
 
 			@Override
 			public void onClick(View v) {
-				//Seach Charities before paying
+				//Search Charities before paying
 				Intent searchCharites =  new Intent(MainLayoutActivity.this, SearchCharityActivity.class);
 				startActivity(searchCharites);
 			}
@@ -187,28 +186,8 @@ public class MainLayoutActivity extends ListActivity {
 	
 	public final Handler onBlacklistUpdate = new Handler () {
 		public void handleMessage (Message msg) {    	
-			//TODO: Notification
 			listAdapter.notifyDataSetChanged();
 			
-//			NotificationCompat.Builder mBuilder =
-//			        new NotificationCompat.Builder(MainLayoutActivity.this)
-//			        .setSmallIcon(R.drawable.appicon)
-//			        .setContentTitle("Words Detected")
-//			        .setContentText("SwearJar has detected more occurrences of blacklisted words.");
-//			Intent resultIntent = getIntent();
-//			
-//			TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainLayoutActivity.this);
-//
-//			stackBuilder.addParentStack(ResultActivity.class);
-//
-//			stackBuilder.addNextIntent(resultIntent);
-//			
-//			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-//			mBuilder.setContentIntent(resultPendingIntent);
-//			NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-//			// mId allows you to update the notification later on.
-//			mNotificationManager.notify(notificationID++, mBuilder.build());
-
 	    }
 	};
 }

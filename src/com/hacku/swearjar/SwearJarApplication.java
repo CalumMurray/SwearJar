@@ -20,18 +20,15 @@ import android.support.v4.app.TaskStackBuilder;
 
 
 /**
-* Facilitates global application state - SharedPreferences (the word blacklist)
+* Facilitates global application state access - the word blacklist
 *
 * @author Calum 
-* */
+*/
 public class SwearJarApplication extends Application {
 
 	public static final String ROOTPATH = Environment.getExternalStorageDirectory().getAbsolutePath();
+	private static int notificationID = 0;
 	
-	//private SharedPreferences prefs;
-    //private SharedPreferences.Editor editor;
-
-
 	private ArrayList<BlackListItem> blackListItems = new ArrayList<BlackListItem>();
 	private Handler uiCallback;
 	
@@ -39,7 +36,6 @@ public class SwearJarApplication extends Application {
     public void onCreate()
     {
         super.onCreate();
-        
         deserializeBlackList();
         
     }
@@ -76,31 +72,31 @@ public class SwearJarApplication extends Application {
         for (BlackListItem item : getBlackListItems())
         	item.addOccurrences(utterance); 
 		
-        //Notification!
-        NotificationCompat.Builder mBuilder =
-		        new NotificationCompat.Builder(this)
-		        .setSmallIcon(R.drawable.appicon)
-		        .setContentTitle("Words Detected")
-		        .setContentText("SwearJar has detected more occurrences of blacklisted words.");
-//		Intent resultIntent = getIntent();
-//		
-//		TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainLayoutActivity.this);
-//
-//		stackBuilder.addParentStack(ResultActivity.class);
-//
-//		stackBuilder.addNextIntent(resultIntent);
-//		
-//		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-//		mBuilder.setContentIntent(resultPendingIntent);
-		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-		// mId allows you to update the notification later on.
-		mNotificationManager.notify(0, mBuilder.build());
-        
+        sendNotification();
+
 		//Tell the UI we're done updating
 		if(uiCallback != null)
 			uiCallback.sendEmptyMessage(0);
 		
 		serializeBlackList();
+	}
+
+	//Sends a notification to the notification bar when new word occurrences detected
+	private void sendNotification() {
+        NotificationCompat.Builder mBuilder =
+		        new NotificationCompat.Builder(this)
+		        .setSmallIcon(R.drawable.appicon)
+		        .setContentTitle("Words Detected")
+		        .setContentText("SwearJar has detected more occurrences of blacklisted words.");
+		
+        Intent resultIntent = new Intent(this, MainLayoutActivity.class);
+		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+		stackBuilder.addParentStack(MainLayoutActivity.class);
+		stackBuilder.addNextIntent(resultIntent);
+		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+		mBuilder.setContentIntent(resultPendingIntent);
+		NotificationManager notificationMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		notificationMan.notify(++notificationID, mBuilder.build());
 	}
 	
 
