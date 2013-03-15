@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import android.app.Application;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -88,7 +89,7 @@ public class SwearJarApplication extends Application {
 		        .setSmallIcon(R.drawable.appicon)
 		        .setContentTitle("Words Detected")
 		        .setContentText("SwearJar has detected more occurrences of blacklisted words.");
-		
+        mBuilder.setAutoCancel(true);
         Intent resultIntent = new Intent(this, MainLayoutActivity.class);
 		TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
 		stackBuilder.addParentStack(MainLayoutActivity.class);
@@ -96,6 +97,7 @@ public class SwearJarApplication extends Application {
 		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 		mBuilder.setContentIntent(resultPendingIntent);
 		NotificationManager notificationMan = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		
 		notificationMan.notify(++notificationID, mBuilder.build());
 	}
 	
