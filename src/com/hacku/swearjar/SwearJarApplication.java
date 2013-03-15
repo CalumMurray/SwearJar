@@ -69,11 +69,18 @@ public class SwearJarApplication extends Application {
 	//Adds to occurrences the number of times that the word it appears in the utterance.  Not case sensitive
 	public void addOccurrences(String utterance) {
 		
+		boolean blackListWordUttered = false;
+		
 		//Add occurrences from last fetch to application's blacklist
         for (BlackListItem item : getBlackListItems())
-        	item.addOccurrences(utterance); 
+        {
+        	int added = item.addOccurrences(utterance); 
+        	if (blackListWordUttered == false && added > 0)
+        		blackListWordUttered = true;
+        }
 		
-        sendNotification();
+        if (blackListWordUttered)
+        	sendNotification();
 
 		//Tell the UI we're done updating
 		if(uiCallback != null)
