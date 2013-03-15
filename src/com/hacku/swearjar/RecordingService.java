@@ -59,7 +59,8 @@ public class RecordingService extends Service implements Runnable {
 		recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.VOICE_UPLINK);
         recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);	
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_WB);
+        recorder.setAudioEncodingBitRate(16000);
         timeStamp = System.currentTimeMillis();						//Make unique filename
         recorder.setOutputFile(filePath + timeStamp + ".3gp");
         try {
@@ -91,7 +92,8 @@ public class RecordingService extends Service implements Runnable {
         
         Log.e("SPEECH RESPONSE", utterance);
         
-        application.addOccurrences(utterance);
+        if(utterance != null && !utterance.equals(""))
+        	application.addOccurrences(utterance);
         
 		rawSpeechFile.delete();	//Delete file
 	}
