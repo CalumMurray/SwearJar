@@ -3,10 +3,14 @@ package com.hacku.swearjar;
 import java.util.ArrayList;
 
 import android.app.ListActivity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.view.ContextMenu;
@@ -28,6 +32,7 @@ import android.widget.ListView;
  */
 public class MainLayoutActivity extends ListActivity {
 
+	private static int notificationID = 0;
 	
 	private TelephonyManager teleManager;
 	private PhoneStateListener callListener;
@@ -182,7 +187,28 @@ public class MainLayoutActivity extends ListActivity {
 	
 	public final Handler onBlacklistUpdate = new Handler () {
 		public void handleMessage (Message msg) {    	
+			//TODO: Notification
 			listAdapter.notifyDataSetChanged();
+			
+//			NotificationCompat.Builder mBuilder =
+//			        new NotificationCompat.Builder(MainLayoutActivity.this)
+//			        .setSmallIcon(R.drawable.appicon)
+//			        .setContentTitle("Words Detected")
+//			        .setContentText("SwearJar has detected more occurrences of blacklisted words.");
+//			Intent resultIntent = getIntent();
+//			
+//			TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainLayoutActivity.this);
+//
+//			stackBuilder.addParentStack(ResultActivity.class);
+//
+//			stackBuilder.addNextIntent(resultIntent);
+//			
+//			PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//			mBuilder.setContentIntent(resultPendingIntent);
+//			NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//			// mId allows you to update the notification later on.
+//			mNotificationManager.notify(notificationID++, mBuilder.build());
+
 	    }
 	};
 }

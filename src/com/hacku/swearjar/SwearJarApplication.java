@@ -9,9 +9,14 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import android.app.Application;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.os.Handler;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 
 
 /**
@@ -71,6 +76,26 @@ public class SwearJarApplication extends Application {
         for (BlackListItem item : getBlackListItems())
         	item.addOccurrences(utterance); 
 		
+        //Notification!
+        NotificationCompat.Builder mBuilder =
+		        new NotificationCompat.Builder(this)
+		        .setSmallIcon(R.drawable.appicon)
+		        .setContentTitle("Words Detected")
+		        .setContentText("SwearJar has detected more occurrences of blacklisted words.");
+//		Intent resultIntent = getIntent();
+//		
+//		TaskStackBuilder stackBuilder = TaskStackBuilder.create(MainLayoutActivity.this);
+//
+//		stackBuilder.addParentStack(ResultActivity.class);
+//
+//		stackBuilder.addNextIntent(resultIntent);
+//		
+//		PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+//		mBuilder.setContentIntent(resultPendingIntent);
+		NotificationManager mNotificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		// mId allows you to update the notification later on.
+		mNotificationManager.notify(0, mBuilder.build());
+        
 		//Tell the UI we're done updating
 		if(uiCallback != null)
 			uiCallback.sendEmptyMessage(0);
