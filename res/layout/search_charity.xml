@@ -2,26 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    >
     
 <EditText
     android:id="@+id/charity_search_text"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10sp"
-    android:background="#cfff"
-    android:hint="@string/charity_search_hint"
+	style="@style/EditTextTheme"
     android:inputType="text"
-    android:padding="@dimen/padding_medium"
-    android:textSize="@dimen/text_extra_large" />
+    android:hint="@string/charity_search_hint"
+ />
 
 <Button
     android:id="@+id/submit_charity_search"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
     android:text="@string/charity_search_hint"
-    android:textSize="@dimen/text_large" />
+    style="@style/ButtonTheme"
+    />
 
 <ListView
     	android:id="@android:id/list"

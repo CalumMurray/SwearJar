@@ -13,13 +13,8 @@
 	
     <Button
         android:id="@+id/payButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/padding_large"
-        android:layout_marginRight="@dimen/padding_large"
         android:text="@string/pay_button" 
-	style="?android:attr/button"
+		style="@style/ButtonTheme"
 	/>
 	
     <!-- References ListAdapter set up programmatically in MainLayoutActivity-->

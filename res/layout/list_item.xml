@@ -21,55 +21,29 @@
     android:layout_below="@id/text_word"
     >
 
-     "
 	<TextView 
 	    android:id="@+id/text_occurrence"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="@dimen/padding_medium"
-	    android:paddingTop="@dimen/padding_medium"
-	    android:textSize="@dimen/text_large"
-	        style="?android:attr/textAppearanceSearchResultSubtitle"
+		style="@style/ListSubItemTheme"
 	    />
 	
 	<TextView 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="@dimen/padding_medium"
-	    android:paddingTop="@dimen/padding_medium"
 	    android:text=" x "
-	    android:textSize="@dimen/text_medium"
-	        style="?android:attr/textAppearanceSearchResultSubtitle"
+	    style="@style/ListSubItemTheme"
 	    />
 	
 	<TextView 
 	    android:id="@+id/text_charge"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="@dimen/padding_medium"
-	    android:paddingTop="@dimen/padding_medium" 
-	    android:textSize="@dimen/text_large"
-	        style="?android:attr/textAppearanceSearchResultSubtitle"
+	    style="@style/ListSubItemTheme"
 	    />
 	    
 	<TextView 
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="@dimen/padding_medium"
-	    android:paddingTop="@dimen/padding_medium"
 	    android:text=" = "
-	    android:textSize="@dimen/text_medium"
-	        style="?android:attr/textAppearanceSearchResultSubtitle"
+	    style="@style/ListSubItemTheme"
 	    />
 	    
 	<TextView 
 	    android:id="@+id/text_total_charge"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:paddingLeft="@dimen/padding_medium"
-	    android:paddingTop="@dimen/padding_medium" 
-	    android:textSize="@dimen/text_large"
-	        style="?android:attr/textAppearanceSearchResultSubtitle"
+	    style="@style/ListSubItemTheme"
 	    />    
 </LinearLayout>
 </RelativeLayout>

@@ -6,34 +6,23 @@
     
     <EditText
             android:id="@+id/add_word"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#cfff"
+			style="@style/EditTextTheme"
             android:hint="@string/word_hint"
             android:textSize="@dimen/text_extra_large"
-            android:padding="@dimen/padding_medium"
-            android:layout_margin="@dimen/padding_medium"
             android:inputType="textCapWords"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
     
     <EditText
             android:id="@+id/add_charge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#cfff"
+            style="@style/EditTextTheme"
             android:hint="@string/charge_hint"
-            android:textSize="@dimen/text_extra_large"
             android:inputType="number"
-            android:padding="@dimen/padding_medium"
-            android:layout_margin="@dimen/padding_medium"
             android:digits="1234567890."/>
 
     <Button
         android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
+        style="@style/ButtonTheme"
         android:text="@string/submit_text"
-        android:textSize="@dimen/text_medium" />
+        />
     
 </LinearLayout>
