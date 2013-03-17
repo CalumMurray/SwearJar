@@ -86,7 +86,14 @@ public class RecordingService extends Service implements Runnable {
 
 	private void addOccurrences() {
 		File rawSpeechFile = new File(filePath + timeStamp + ".3gp");
-		SpeechResponse response = GoogleSpeechAPI.getSpeechResponse(rawSpeechFile);
+		
+		int retryAttempts = 2;
+		
+		SpeechResponse response = new SpeechResponse();
+		while(retryAttempts >= 0 && response.getStatus() != 0){
+			retryAttempts--;
+			response = GoogleSpeechAPI.getSpeechResponse(rawSpeechFile);
+		}
 	            
         String utterance = response.getBestUtterance();		//TODO: Possible multiple hypotheses?
         

@@ -107,7 +107,7 @@ public class SearchCharityActivity extends ListActivity {
 		                    	payJustGiving(position);
 
 		                    	application.resetOccurrences();
-		                    	Toast.makeText(SearchCharityActivity.this, "Payment received.  Word occurrences reset.", Toast.LENGTH_SHORT).show();
+		                    	//Toast.makeText(SearchCharityActivity.this, "Payment received.  Word occurrences reset.", Toast.LENGTH_SHORT).show();
 		                    	
 		                    }
 
