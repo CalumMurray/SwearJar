@@ -50,7 +50,7 @@ public class EditWordActivity extends Activity {
 					Toast.makeText(EditWordActivity.this, "Invalid charge amount", Toast.LENGTH_LONG).show();
 					return;
 				}
-				else if (wordInput.isEmpty()|| chargeInput.isEmpty())
+				else if (wordInput.isEmpty() || chargeInput.isEmpty())
 				{
 					Toast.makeText(EditWordActivity.this, "Please enter both values in both fields.", Toast.LENGTH_LONG).show();
 					return;

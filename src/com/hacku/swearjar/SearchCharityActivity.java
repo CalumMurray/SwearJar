@@ -114,6 +114,13 @@ public class SearchCharityActivity extends ListActivity {
 							private void payJustGiving(int position) {
 								// Loop through words getting total cost
 		        				BigDecimal totalCost = application.getTotalCostDue();
+		        				
+		        				if (totalCost.compareTo(new BigDecimal(2)) == -1)	//If total cost is less than £2
+		        				{
+		        					Toast.makeText(SearchCharityActivity.this, "Just Giving requires a minimum of £2 to donate.", Toast.LENGTH_LONG).show();
+		        					return;
+		        				}
+		        				
 		        				NumberFormat formatter = NumberFormat.getNumberInstance();
 		        				formatter.setMaximumFractionDigits(2);
 		                        

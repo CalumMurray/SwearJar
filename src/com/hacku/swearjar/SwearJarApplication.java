@@ -9,13 +9,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import android.app.Application;
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
@@ -29,6 +29,7 @@ public class SwearJarApplication extends Application {
 
 	public static final String ROOTPATH = Environment.getExternalStorageDirectory().getAbsolutePath();
 	private static int notificationID = 0;
+	private static final int VIBRATE_TIME = 100;
 	
 	private ArrayList<BlackListItem> blackListItems = new ArrayList<BlackListItem>();
 	private Handler uiCallback;
@@ -74,14 +75,23 @@ public class SwearJarApplication extends Application {
         for (BlackListItem item : getBlackListItems())
         	runningTotal += item.addOccurrences(utterance); 
 		
-    	if (runningTotal > 0)
+    	if (runningTotal > 0)	//If any blacklisted words have been said
+    	{
+    		vibrate();
         	sendNotification();
+    	}
 
 		//Tell the UI we're done updating
 		if(uiCallback != null)
 			uiCallback.sendEmptyMessage(0);
 		
 		serializeBlackList();
+	}
+
+	private void vibrate() {
+		Vibrator vibrator = (Vibrator)getSystemService(VIBRATOR_SERVICE);
+		vibrator.vibrate(VIBRATE_TIME);
+		
 	}
 
 	//Sends a notification to the notification bar when new word occurrences detected
