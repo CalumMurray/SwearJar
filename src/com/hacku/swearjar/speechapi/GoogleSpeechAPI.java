@@ -63,7 +63,7 @@ public class GoogleSpeechAPI {
 			ex.printStackTrace();
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
-		} catch(Exception e){
+		} catch(Exception e){  //TODO Remove Pokemon
 			e.printStackTrace();
 		}
 

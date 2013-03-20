@@ -38,12 +38,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
+            <intent-filter>
+	            <action android:name="android.intent.action.VIEW" />
+	            <category android:name="android.intent.category.DEFAULT" />
+	            <category android:name="android.intent.category.BROWSABLE" />
+	            <data android:scheme="swearjar" android:host="donation" android:pathPrefix="/track" /> 
+            </intent-filter>
         </activity>
         
-        <activity android:name=".WordsActivity" /> <!-- REMOVE?? -->
+        <activity android:name=".WordsActivity" /> <!-- TODO REMOVE?? -->
         <activity android:name=".AddWordActivity" />
         <activity android:name=".EditWordActivity" />
-        <activity android:name=".SearchCharityActivity" />
+        <activity android:name=".SearchCharityActivity"/>
         
         <service android:enabled="true" android:name=".RecordingService" />
         
