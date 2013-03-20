@@ -16,18 +16,22 @@ public class BlackListItem implements Serializable {
 	private BigDecimal charge;
 	private int occurrences;
 
+	private boolean matchSimilar;
+	
 	private static final NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.UK); 
 	
 	public BlackListItem(String word, BigDecimal charge){
 		this.word = word;
 		this.charge = charge;
 		this.occurrences = 0;
+		matchSimilar = true;
 	}
 	
-	public BlackListItem(String word, BigDecimal charge, int occurrences) {
+	public BlackListItem(String word, BigDecimal charge, int occurrences, boolean matchSimilar) {
 		this.word = word;
 		this.charge = charge;
 		this.occurrences = occurrences;
+		this.matchSimilar = matchSimilar;
 	}
 
 	public String getWord() {
@@ -49,6 +53,14 @@ public class BlackListItem implements Serializable {
 		this.occurrences = occurrences;
 	}
 	
+	public boolean isMatchSimilar() {
+		return matchSimilar;
+	}
+
+	public void setMatchSimilar(boolean matchSimilar) {
+		this.matchSimilar = matchSimilar;
+	}
+
 	/**
 	 * @return charge * occurrences
 	 */
@@ -90,8 +102,18 @@ public class BlackListItem implements Serializable {
 	 * @return number of times this BlackListItem's word appears in utterance
 	 */
 	public int addOccurrences(String utterance) {
-		int occurrences = StringUtils.countMatches(utterance.toUpperCase(), word.toUpperCase());  //Find the number of matches
+		int occurrences = 0;
+		if (matchSimilar)
+			occurrences = StringUtils.countMatches(utterance.toUpperCase(), word.toUpperCase());  //Find the number of SIMILAR matches
+		else
+		{
+			//Find the number of EXACT matches
+			for (String splitWord : utterance.split(" "))
+				if (splitWord.toUpperCase().equals(word.toUpperCase()))
+					occurrences++;
+		}
 		this.occurrences += occurrences; //Add the matches to the total matches
+			
 		return occurrences;
 	}
 }

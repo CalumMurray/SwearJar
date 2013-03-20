@@ -19,7 +19,6 @@ import android.os.Vibrator;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-
 /**
 * Facilitates global application state access - the word blacklist
 *
@@ -60,10 +59,11 @@ public class SwearJarApplication extends Application {
 		serializeBlackList();
 	}
 	
-	public void editBlackListItem(BlackListItem itemToEdit, String word, BigDecimal charge) {
+	public void editBlackListItem(BlackListItem itemToEdit, String word, BigDecimal charge, boolean matchSimilar) {
 		
 		itemToEdit.setWord(word);
 		itemToEdit.setCharge(charge);
+		itemToEdit.setMatchSimilar(matchSimilar);
 		serializeBlackList();
 	}
 	
@@ -168,8 +168,6 @@ public class SwearJarApplication extends Application {
 		}
 	}
 
-
-
 	public BigDecimal getTotalCostDue() {
 		BigDecimal total = new BigDecimal(0);
 		for (BlackListItem item : blackListItems)
@@ -189,8 +187,5 @@ public class SwearJarApplication extends Application {
 			return false;
 		return true;
 	}
-
-	
-	
 
 }

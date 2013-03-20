@@ -99,9 +99,10 @@ public class RecordingService extends Service implements Runnable {
         
         Log.e("SPEECH RESPONSE", utterance);
         
-        if(utterance != null && !utterance.equals(""))
-        	application.addOccurrences(utterance);
         
+
+	        if(utterance != null && !utterance.equals(""))
+	        	application.addOccurrences(utterance);
 		rawSpeechFile.delete();	//Delete file
 	}
 	

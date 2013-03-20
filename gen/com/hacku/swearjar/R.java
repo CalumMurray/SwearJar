@@ -34,21 +34,22 @@ public final class R {
         public static final int logo2=0x7f020004;
     }
     public static final class id {
-        public static final int addCharge=0x7f0b000c;
-        public static final int addCharity=0x7f0b000d;
-        public static final int addWord=0x7f0b000b;
+        public static final int addCharge=0x7f0b000d;
+        public static final int addCharity=0x7f0b000e;
+        public static final int addWord=0x7f0b000c;
         public static final int add_charge=0x7f0b0001;
         public static final int add_word=0x7f0b0000;
-        public static final int banner=0x7f0b0007;
-        public static final int charity_search_text=0x7f0b0009;
-        public static final int menuItemPrefs=0x7f0b000e;
-        public static final int payButton=0x7f0b0008;
-        public static final int submit=0x7f0b0002;
-        public static final int submit_charity_search=0x7f0b000a;
-        public static final int text_charge=0x7f0b0005;
-        public static final int text_occurrence=0x7f0b0004;
-        public static final int text_total_charge=0x7f0b0006;
-        public static final int text_word=0x7f0b0003;
+        public static final int banner=0x7f0b0008;
+        public static final int charity_search_text=0x7f0b000a;
+        public static final int exact_match=0x7f0b0002;
+        public static final int menuItemPrefs=0x7f0b000f;
+        public static final int payButton=0x7f0b0009;
+        public static final int submit=0x7f0b0003;
+        public static final int submit_charity_search=0x7f0b000b;
+        public static final int text_charge=0x7f0b0006;
+        public static final int text_occurrence=0x7f0b0005;
+        public static final int text_total_charge=0x7f0b0007;
+        public static final int text_word=0x7f0b0004;
     }
     public static final class layout {
         public static final int add_word=0x7f030000;
@@ -65,6 +66,7 @@ public final class R {
         public static final int app_name=0x7f060000;
         public static final int charge_hint=0x7f06000a;
         public static final int charity_search_hint=0x7f06000c;
+        public static final int checkbox_string=0x7f06000d;
         public static final int empty_List=0x7f060007;
         public static final int menu_settings=0x7f060001;
         public static final int pay_button=0x7f060006;
@@ -78,9 +80,10 @@ public final class R {
     public static final class style {
         public static final int AppTheme=0x7f090000;
         public static final int ButtonTheme=0x7f090002;
+        public static final int CheckBoxTheme=0x7f090004;
         public static final int EditTextTheme=0x7f090001;
         public static final int ListSubItemTheme=0x7f090003;
-        public static final int SwearJar=0x7f090004;
+        public static final int SwearJar=0x7f090005;
     }
     public static final class xml {
         public static final int prefs=0x7f040000;

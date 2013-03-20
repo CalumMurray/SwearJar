@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -14,7 +15,9 @@ public class AddWordActivity extends Activity {
 	
 	private EditText wordText;
 	private EditText chargeText;
+	private CheckBox checkBox;
 	private Button submitButton;
+	
 	private SwearJarApplication application;
 
 	
@@ -28,7 +31,8 @@ public class AddWordActivity extends Activity {
 		submitButton = (Button) findViewById(R.id.submit);
 		wordText = (EditText) findViewById(R.id.add_word);
 		chargeText = (EditText) findViewById(R.id.add_charge);
-		
+		checkBox = (CheckBox)findViewById(R.id.exact_match);
+				
 		//OnLongClickListener for button
 		submitButton.setOnClickListener(new OnClickListener() {
 			
@@ -50,7 +54,7 @@ public class AddWordActivity extends Activity {
 				}
 				
 				//Create the new item and add to the list
-				BlackListItem blackListItem = new BlackListItem(wordInput, new BigDecimal(chargeInput));
+				BlackListItem blackListItem = new BlackListItem(wordInput, new BigDecimal(chargeInput), 0, checkBox.isChecked());
 								
 				application.addBlackListItem(blackListItem);
 				Toast.makeText(AddWordActivity.this, "Word added to blacklist...", Toast.LENGTH_LONG).show();

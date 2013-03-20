@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -15,6 +16,8 @@ public class EditWordActivity extends Activity {
 	private Button submitButton;
 	private EditText wordText;
 	private EditText chargeText;
+	private CheckBox checkBox;
+	
 	private BlackListItem blackListItem;
 	private SwearJarApplication application;
 	
@@ -33,10 +36,10 @@ public class EditWordActivity extends Activity {
 		submitButton = (Button) findViewById(R.id.submit);
 		wordText = (EditText) findViewById(R.id.add_word);
 		chargeText = (EditText) findViewById(R.id.add_charge);
+		checkBox = (CheckBox)findViewById(R.id.exact_match);
 		
 		wordText.setText(blackListItem.getWord());
 		chargeText.setText(blackListItem.getCharge().toString());
-		
 		
 		//Setup onClickListener for Pay button
 		submitButton.setOnClickListener(new OnClickListener() {
@@ -56,7 +59,7 @@ public class EditWordActivity extends Activity {
 					return;
 				}
 				
-				application.editBlackListItem(blackListItem, wordInput, new BigDecimal(chargeInput));
+				application.editBlackListItem(blackListItem, wordInput, new BigDecimal(chargeInput), checkBox.isChecked());
 
 				setResult(RESULT_OK);
 				finish();

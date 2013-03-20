@@ -5,20 +5,27 @@
     android:orientation="vertical" >
     
     <EditText
-            android:id="@+id/add_word"
-			style="@style/EditTextTheme"
-            android:hint="@string/word_hint"
-            android:textSize="@dimen/text_extra_large"
-            android:inputType="textCapWords"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
+       android:id="@+id/add_word"
+	   style="@style/EditTextTheme"
+       android:hint="@string/word_hint"
+       android:textSize="@dimen/text_extra_large"
+       android:inputType="textCapWords"
+       android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"/>
     
     <EditText
-            android:id="@+id/add_charge"
-            style="@style/EditTextTheme"
-            android:hint="@string/charge_hint"
-            android:inputType="number"
-            android:digits="1234567890."/>
+       android:id="@+id/add_charge"
+       style="@style/EditTextTheme"
+       android:hint="@string/charge_hint"
+       android:inputType="number"
+       android:digits="1234567890."/>
 
+    <CheckBox
+        android:id="@+id/exact_match"
+        android:text="@string/checkbox_string"
+        android:checked="true"
+        style="@style/CheckBoxTheme"
+        />
+    
     <Button
         android:id="@+id/submit"
         style="@style/ButtonTheme"
