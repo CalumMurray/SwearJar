@@ -93,7 +93,7 @@ public class GoogleSpeechAPI {
 	private static HttpPost getPost(ByteArrayInputStream data) {
 		
 		//HttpPost postRequest = new HttpPost("http://192.168.0.13:8080/convert");
-		HttpPost postRequest = new HttpPost("http://134.36.37.24:8080/convert");
+		HttpPost postRequest = new HttpPost("https://ec2-54-245-53-146.us-west-2.compute.amazonaws.com:8443/convert");
 		
 		HttpParams params = new BasicHttpParams();
 		postRequest.setParams(params);
