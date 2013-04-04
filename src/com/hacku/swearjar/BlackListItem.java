@@ -108,7 +108,7 @@ public class BlackListItem implements Serializable {
 		else
 		{
 			//Find the number of EXACT matches
-			for (String splitWord : utterance.split(" "))
+			for (String splitWord : utterance.split(" "))  //TODO would be better if utterance was only split once
 				if (splitWord.toUpperCase().equals(word.toUpperCase()))
 					occurrences++;
 		}
