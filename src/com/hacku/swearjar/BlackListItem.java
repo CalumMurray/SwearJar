@@ -107,8 +107,9 @@ public class BlackListItem implements Serializable {
 			occurrences = StringUtils.countMatches(utterance.toUpperCase(), word.toUpperCase());  //Find the number of SIMILAR matches
 		else
 		{
+			String[] words = utterance.split(" ");
 			//Find the number of EXACT matches
-			for (String splitWord : utterance.split(" "))  //TODO would be better if utterance was only split once
+			for (String splitWord : words)  
 				if (splitWord.toUpperCase().equals(word.toUpperCase()))
 					occurrences++;
 		}

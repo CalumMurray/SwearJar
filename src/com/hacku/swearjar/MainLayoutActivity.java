@@ -147,6 +147,7 @@ public class MainLayoutActivity extends ListActivity {
 			intent.putExtra("blackListItemIndex", lastSelectedIndex);
 			startActivityForResult(intent, UPDATE_BLACK_LIST_REQUEST);
 		} else if (menuItemName.equals("Delete")) {
+			@SuppressWarnings("unused")
 			ArrayList<BlackListItem> blackListWords = (ArrayList<BlackListItem>) application.getBlackListItems();
 
 			// Delete word
