@@ -94,7 +94,7 @@ public class GoogleSpeechAPI {
 		
 		//HttpPost postRequest = new HttpPost("http://192.168.0.13:8080/convert");
 		//TODO switch to https on 8443 and accept self certification
-		HttpPost postRequest = new HttpPost("http://ec2-54-245-53-146.us-west-2.compute.amazonaws.com:8080/convert");
+		HttpPost postRequest = new HttpPost("http://ec2-54-241-217-77.us-west-1.compute.amazonaws.com:8080/convert");
 		
 		HttpParams params = new BasicHttpParams();
 		postRequest.setParams(params);
